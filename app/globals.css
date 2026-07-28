@@ -1,0 +1,1055 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN SYSTEM — Theme Variables
+   Matching haoqi.design's exact palette
+   ============================================================ */
+
+/* ---------- Light Theme (Default) ---------- */
+:root,
+[data-theme="light"] {
+  --bg-primary: #f0efe9;
+  --bg-secondary: #e6e5df;
+  --bg-card: #dddcd6;
+  --bg-card-dark: #111111;
+  --bg-overlay: rgba(240, 239, 233, 0.85);
+
+  --text-primary: #0a0a0a;
+  --text-secondary: #555555;
+  --text-muted: #999999;
+  --text-on-dark: #f0efe9;
+
+  --border-color: rgba(10, 10, 10, 0.1);
+  --border-dotted: rgba(10, 10, 10, 0.22);
+
+  --accent-highlight: #c8ff00;
+  --accent-primary: #6c5ce7;
+
+  --grid-color: rgba(10, 10, 10, 0.08);
+  --grid-cross-color: rgba(10, 10, 10, 0.2);
+
+  --hero-gradient: linear-gradient(
+    145deg,
+    #b8cfe6 0%,
+    #d4c5a9 25%,
+    #f0efe9 50%,
+    #c5d5e8 75%,
+    #e8dfd0 100%
+  );
+
+  --tag-bg: rgba(10, 10, 10, 0.05);
+  --tag-text: #333333;
+
+  color-scheme: light;
+}
+
+/* ---------- Dark Theme ---------- */
+[data-theme="dark"] {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #111118;
+  --bg-card: #181822;
+  --bg-card-dark: #111111;
+  --bg-overlay: rgba(10, 10, 15, 0.85);
+
+  --text-primary: #eeeeee;
+  --text-secondary: #aaaaaa;
+  --text-muted: #666666;
+  --text-on-dark: #eeeeee;
+
+  --border-color: rgba(238, 238, 238, 0.08);
+  --border-dotted: rgba(238, 238, 238, 0.15);
+
+  --accent-highlight: #c8ff00;
+  --accent-primary: #a29bfe;
+
+  --grid-color: rgba(238, 238, 238, 0.04);
+  --grid-cross-color: rgba(238, 238, 238, 0.12);
+
+  --hero-gradient: linear-gradient(
+    145deg,
+    #0f1624 0%,
+    #1a1035 25%,
+    #0a0a0f 50%,
+    #151030 75%,
+    #0d1525 100%
+  );
+
+  --tag-bg: rgba(238, 238, 238, 0.06);
+  --tag-text: #cccccc;
+
+  color-scheme: dark;
+}
+
+/* ---------- Tailwind v4 Theme Tokens ---------- */
+@theme inline {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card: var(--bg-card);
+  --color-bg-card-dark: var(--bg-card-dark);
+  --color-bg-overlay: var(--bg-overlay);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-border: var(--border-color);
+  --color-border-dotted: var(--border-dotted);
+
+  --color-accent-highlight: var(--accent-highlight);
+  --color-accent-primary: var(--accent-primary);
+
+  --color-grid: var(--grid-color);
+  --color-grid-cross: var(--grid-cross-color);
+
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+/* ============================================================
+   BASE RESETS & GLOBALS
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ============================================================
+   GRID BACKGROUND
+   Recreates haoqi.design's architectural grid overlay
+   ============================================================ */
+
+.grid-background {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Vertical + Horizontal grid lines */
+.grid-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    /* 4 vertical columns */
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px) 0 0 / 25% 100%,
+    /* horizontal lines every 50vh */
+    linear-gradient(0deg, var(--grid-color) 1px, transparent 1px) 0 0 / 100% 50vh;
+}
+
+/* Center vertical line (stronger) */
+.grid-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  background: var(--grid-color);
+  transform: translateX(-50%);
+}
+
+/* Cross markers at intersections */
+.grid-cross {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grid-cross::before,
+.grid-cross::after {
+  content: '';
+  position: absolute;
+  background: var(--grid-cross-color);
+}
+
+.grid-cross::before {
+  width: 14px;
+  height: 1px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.grid-cross::after {
+  width: 1px;
+  height: 14px;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+/* ============================================================
+   SCROLL PROGRESS BAR (right edge)
+   ============================================================ */
+
+.scroll-progress {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 60px;
+  background: var(--border-color);
+  z-index: 998;
+  border-radius: 1px;
+}
+
+.scroll-progress-fill {
+  width: 100%;
+  background: var(--text-primary);
+  border-radius: 1px;
+  transition: height 0.1s linear;
+}
+
+/* ============================================================
+   CURSOR GLOW (soft radial gradient follows mouse)
+   ============================================================ */
+
+.cursor-glow {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108, 92, 231, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              top 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] .cursor-glow {
+  background: radial-gradient(circle, rgba(162, 155, 254, 0.06) 0%, transparent 70%);
+}
+
+/* ============================================================
+   SELECTION STYLES
+   ============================================================ */
+
+::selection {
+  background: var(--accent-highlight);
+  color: #0a0a0a;
+}
+
+/* ============================================================
+   REVEAL ANIMATIONS (triggered by Framer Motion, but CSS fallback)
+   ============================================================ */
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.reveal-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ============================================================
+   HEADER / NAVBAR
+   ============================================================ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background 0.4s ease;
+  pointer-events: auto;
+  isolation: isolate;
+}
+
+.header-logo {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+.header-nav-link {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  position: relative;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+.header-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--text-primary);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-nav-link:hover::after,
+.header-nav-link.active::after {
+  width: 100%;
+}
+
+.header-toggle {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.28rem 0.6rem;
+  border: 1px dotted var(--border-dotted);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.header-toggle:hover {
+  border-style: solid;
+  background: var(--tag-bg);
+}
+
+.sound-active-pulse {
+  border-color: var(--accent-highlight) !important;
+  box-shadow: 0 0 12px rgba(200, 255, 0, 0.25);
+  animation: soundPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes soundPulse {
+  0%, 100% {
+    box-shadow: 0 0 6px rgba(200, 255, 0, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(200, 255, 0, 0.45);
+  }
+}
+
+/* ============================================================
+   HAMBURGER MENU (Mobile)
+   ============================================================ */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1px;
+  transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.mobile-overlay {
+  display: none;
+}
+
+/* ============================================================
+   BOTTOM STATUS BAR
+   ============================================================ */
+
+.status-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  padding: 0.7rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-overlay);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: auto;
+  isolation: isolate;
+}
+
+.status-timezone {
+  font-variant-numeric: tabular-nums;
+}
+
+.status-coords {
+  font-variant-numeric: tabular-nums;
+}
+
+.status-globe {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   HERO SECTION — Matching haoqi.design layout exactly
+   ============================================================ */
+
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-gradient);
+  opacity: 0.6;
+  z-index: 0;
+}
+
+/* Scanline / halftone grid overlay */
+.hero-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(128, 128, 128, 0.03) 2px,
+      rgba(128, 128, 128, 0.03) 4px
+    );
+  mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .hero-scanlines {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(200, 200, 255, 0.02) 2px,
+      rgba(200, 200, 255, 0.02) 4px
+    );
+  mix-blend-mode: screen;
+}
+
+/* ============================================================
+   AWWWARDS INFLATED GLOSSY TUBE 3D SVG "HELLO"
+   ============================================================ */
+.hello-tube-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hello-tube-container {
+  position: relative;
+  width: clamp(420px, 75vw, 980px);
+  height: clamp(220px, 28vw, 380px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.hello-tube-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 50px rgba(108, 92, 231, 0.45)) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+}
+
+.hello-tube-path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: drawHandwriting 3.2s cubic-bezier(0.22, 1, 0.36, 1) forwards, pulseNeonTube 4.5s ease-in-out infinite 3.2s;
+}
+
+@keyframes drawHandwriting {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulseNeonTube {
+  0%, 100% {
+    filter: drop-shadow(0 0 35px rgba(116, 95, 255, 0.65)) brightness(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 60px rgba(168, 85, 247, 0.95)) brightness(1.15);
+  }
+}
+
+/* 3D "hello" text — legacy layers */
+.hello-3d-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hello-3d-container {
+  position: relative;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* Shared styles for all hello layers */
+.hello-3d-shadow,
+.hello-3d-back,
+.hello-3d-mid,
+.hello-3d-front,
+.hello-3d-gloss {
+  font-family: var(--font-pacifico), -apple-system, BlinkMacSystemFont, "Apple Garamond", "Segoe UI", Roboto, cursive;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(8rem, 18vw, 16rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Layer 1: Deep shadow (furthest back) */
+.hello-3d-shadow {
+  color: transparent;
+  transform: translate(-50%, -50%) translateZ(-40px);
+  text-shadow:
+    0 30px 60px rgba(72, 52, 212, 0.25),
+    0 15px 30px rgba(108, 92, 231, 0.15);
+}
+
+/* Layer 2: Back face (dark, gives depth) */
+.hello-3d-back {
+  transform: translate(-50%, -50%) translateZ(-20px) translate(3px, 4px);
+  color: var(--hello-back);
+  opacity: 0.6;
+}
+
+/* Layer 3: Mid face */
+.hello-3d-mid {
+  transform: translate(-50%, -50%) translateZ(-10px) translate(1.5px, 2px);
+  color: var(--hello-mid);
+  opacity: 0.5;
+}
+
+/* Layer 4: Front face (main visible) */
+.hello-3d-front {
+  transform: translate(-50%, -50%) translateZ(0);
+  background: var(--hello-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 8px 24px var(--hello-shadow));
+}
+
+/* Layer 5: Gloss highlight overlay */
+.hello-3d-gloss {
+  transform: translate(-50%, -50%) translateZ(5px);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    transparent 60%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Make the container positioned for the absolute layers */
+.hello-3d-container {
+  width: clamp(400px, 70vw, 900px);
+  height: clamp(200px, 25vw, 350px);
+}
+
+/* Light theme hello colors */
+:root,
+[data-theme="light"] {
+  --hello-gradient: linear-gradient(
+    135deg,
+    #8e9aaf 0%,
+    #a8b5c8 20%,
+    #c4d0e2 40%,
+    #d5dde8 60%,
+    #b8c5d8 80%,
+    #95a5bd 100%
+  );
+  --hello-back: #6b7b94;
+  --hello-mid: #8494ab;
+  --hello-shadow: rgba(107, 123, 148, 0.3);
+}
+
+/* Dark theme hello colors — glossy purple/blue chrome */
+[data-theme="dark"] {
+  --hello-gradient: linear-gradient(
+    135deg,
+    #3d2d8f 0%,
+    #5b45c9 20%,
+    #7b68ee 40%,
+    #9b8df0 50%,
+    #6c5ce7 65%,
+    #4834d4 80%,
+    #3d2d8f 100%
+  );
+  --hello-back: #1a1040;
+  --hello-mid: #2d1f6e;
+  --hello-shadow: rgba(108, 92, 231, 0.5);
+}
+
+/* ============================================================
+   HERO CONTENT — Corner-positioned text elements
+   ============================================================ */
+
+.hero-content {
+  position: relative;
+  z-index: 20;
+  padding: 0 2rem;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 80px;
+  padding-bottom: 50px;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.hero-content * {
+  pointer-events: auto;
+}
+
+/* Top-left: Role/subtitle */
+.hero-role {
+  align-self: flex-start;
+}
+
+.hero-role h2 {
+  font-family: var(--font-manrope), sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+/* Center-left: Tagline */
+.hero-tagline {
+  position: absolute;
+  top: 35%;
+  left: 25%;
+}
+
+.hero-tagline p {
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* Top-right: Bio/description */
+.hero-bio {
+  position: absolute;
+  top: 80px;
+  right: 2rem;
+  max-width: 300px;
+  text-align: right;
+}
+
+.hero-bio p {
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Bottom-left: Main title — NOT covering hello */
+.hero-title {
+  font-family: var(--font-manrope), sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.2rem, 4.4vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-align: left;
+  align-self: flex-start;
+  max-width: 720px;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+.hero-dimension-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+}
+
+/* ============================================================
+   HERO STICKERS — Die-Cut Falling from Top Images
+   Matching haoqi.design physics & physical sticker aesthetics
+   ============================================================ */
+
+.hero-sticker {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  will-change: transform;
+  transition: filter 0.3s ease;
+}
+
+.sticker-die-cut {
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.28));
+}
+
+.sticker-die-cut:hover {
+  filter: drop-shadow(0 24px 44px rgba(0, 0, 0, 0.45));
+}
+
+.sticker-image-wrapper {
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sticker-die-cut:hover .sticker-image-wrapper {
+  transform: scale(1.08);
+}
+
+.sticker-placeholder {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed var(--border-dotted);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   MAGNETIC TYPOGRAPHY WRAPPER
+   ============================================================ */
+
+.magnetic-heading-wrapper {
+  display: inline-block;
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   INTERACTIVE CURSOR RING & DOT (Desktop Spotlight)
+   ============================================================ */
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  margin-top: -18px;
+  margin-left: -18px;
+  transition:
+    width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    margin 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease,
+    border-color 0.3s ease;
+  will-change: transform;
+}
+
+.cursor-ring.text {
+  width: 72px;
+  height: 72px;
+  margin-top: -36px;
+  margin-left: -36px;
+  background: rgba(200, 255, 0, 0.18);
+  border-color: var(--accent-highlight);
+  mix-blend-mode: difference;
+}
+
+.cursor-ring.pointer {
+  width: 52px;
+  height: 52px;
+  margin-top: -26px;
+  margin-left: -26px;
+  background: rgba(108, 92, 231, 0.15);
+  border-color: var(--accent-primary);
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  margin-top: -3px;
+  margin-left: -3px;
+  transition:
+    opacity 0.25s ease,
+    transform 0.1s linear;
+  will-change: transform;
+}
+
+.cursor-dot.text {
+  opacity: 0;
+}
+
+.cursor-dot.pointer {
+  transform: scale(1.5);
+  background: var(--accent-highlight);
+}
+
+/* ============================================================
+   RESPONSIVE UTILITIES
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .scroll-progress {
+    right: 0.75rem;
+  }
+
+  .header {
+    padding: 1rem 1.25rem;
+  }
+
+  .header-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 320px;
+    height: 100vh;
+    height: 100dvh;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    background: var(--bg-primary);
+    border-left: 1px solid var(--border-color);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+  }
+
+  .header-nav.open {
+    right: 0;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobile-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+  }
+
+  .status-bar {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.62rem;
+  }
+
+  /* Hero responsive */
+  .hero-content {
+    padding: 0 1.25rem;
+    padding-top: 70px;
+    padding-bottom: 40px;
+  }
+
+  .hero-bio {
+    position: static;
+    text-align: left;
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+
+  .hero-tagline {
+    position: static;
+    margin-top: 1rem;
+  }
+
+  .hero-title {
+    max-width: 100%;
+  }
+
+  .hello-3d-shadow,
+  .hello-3d-back,
+  .hello-3d-mid,
+  .hello-3d-front,
+  .hello-3d-gloss {
+    font-size: clamp(5rem, 22vw, 8rem);
+  }
+
+  .hello-3d-container {
+    width: 90vw;
+    height: 150px;
+  }
+
+  /* Keep stickers visible on mobile with smaller scale */
+  .hero-sticker {
+    transform: scale(0.65) !important;
+    opacity: 0.85;
+  }
+}
+
+/* ============================================================
+   NOISE TEXTURE & PERMANENT GRID OVERLAY (PHASE 5)
+   ============================================================ */
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+[data-theme="dark"] .noise-overlay {
+  opacity: 0.06;
+}
+
+.grid-background {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 25vw 50vh;
+}
+
+[data-theme="light"] .grid-background {
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
