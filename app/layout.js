@@ -8,6 +8,7 @@ import CursorGlow from "./components/CursorGlow";
 import ScrollProgress from "./components/ScrollProgress";
 import Header from "./components/Header";
 import StatusBar from "./components/StatusBar";
+import NavigationCleanup from "./components/NavigationCleanup";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -74,6 +75,7 @@ export default function RootLayout({ children }) {
               <GridBackground />
               <CursorGlow />
               <ScrollProgress />
+              <NavigationCleanup />
               <Header />
               <main className="relative z-[2]">{children}</main>
               <StatusBar />

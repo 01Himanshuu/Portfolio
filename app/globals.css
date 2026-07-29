@@ -28,14 +28,12 @@
   --grid-color: rgba(10, 10, 10, 0.08);
   --grid-cross-color: rgba(10, 10, 10, 0.2);
 
-  --hero-gradient: linear-gradient(
-    145deg,
-    #b8cfe6 0%,
-    #d4c5a9 25%,
-    #f0efe9 50%,
-    #c5d5e8 75%,
-    #e8dfd0 100%
-  );
+  --hero-gradient: linear-gradient(145deg,
+      #b8cfe6 0%,
+      #d4c5a9 25%,
+      #f0efe9 50%,
+      #c5d5e8 75%,
+      #e8dfd0 100%);
 
   --tag-bg: rgba(10, 10, 10, 0.05);
   --tag-text: #333333;
@@ -65,14 +63,12 @@
   --grid-color: rgba(238, 238, 238, 0.04);
   --grid-cross-color: rgba(238, 238, 238, 0.12);
 
-  --hero-gradient: linear-gradient(
-    145deg,
-    #0f1624 0%,
-    #1a1035 25%,
-    #0a0a0f 50%,
-    #151030 75%,
-    #0d1525 100%
-  );
+  --hero-gradient: linear-gradient(145deg,
+      #0f1624 0%,
+      #1a1035 25%,
+      #0a0a0f 50%,
+      #151030 75%,
+      #0d1525 100%);
 
   --tag-bg: rgba(238, 238, 238, 0.06);
   --tag-text: #cccccc;
@@ -118,7 +114,8 @@
 }
 
 html {
-  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  scroll-behavior: auto;
+  /* Lenis handles smooth scroll */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -143,7 +140,8 @@ img {
   display: block;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -252,7 +250,7 @@ ul, ol {
   z-index: 0;
   transform: translate(-50%, -50%);
   transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              top 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    top 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-theme="dark"] .cursor-glow {
@@ -281,7 +279,7 @@ ul, ol {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* ============================================================
@@ -378,9 +376,12 @@ ul, ol {
 }
 
 @keyframes soundPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 6px rgba(200, 255, 0, 0.15);
   }
+
   50% {
     box-shadow: 0 0 16px rgba(200, 255, 0, 0.45);
   }
@@ -496,25 +497,21 @@ ul, ol {
   z-index: 1;
   pointer-events: none;
   background-image:
-    repeating-linear-gradient(
-      0deg,
+    repeating-linear-gradient(0deg,
       transparent,
       transparent 2px,
       rgba(128, 128, 128, 0.03) 2px,
-      rgba(128, 128, 128, 0.03) 4px
-    );
+      rgba(128, 128, 128, 0.03) 4px);
   mix-blend-mode: multiply;
 }
 
 [data-theme="dark"] .hero-scanlines {
   background-image:
-    repeating-linear-gradient(
-      0deg,
+    repeating-linear-gradient(0deg,
       transparent,
       transparent 2px,
       rgba(200, 200, 255, 0.02) 2px,
-      rgba(200, 200, 255, 0.02) 4px
-    );
+      rgba(200, 200, 255, 0.02) 4px);
   mix-blend-mode: screen;
 }
 
@@ -565,9 +562,12 @@ ul, ol {
 }
 
 @keyframes pulseNeonTube {
-  0%, 100% {
+
+  0%,
+  100% {
     filter: drop-shadow(0 0 35px rgba(116, 95, 255, 0.65)) brightness(1);
   }
+
   50% {
     filter: drop-shadow(0 0 60px rgba(168, 85, 247, 0.95)) brightness(1.15);
   }
@@ -647,12 +647,10 @@ ul, ol {
 /* Layer 5: Gloss highlight overlay */
 .hello-3d-gloss {
   transform: translate(-50%, -50%) translateZ(5px);
-  background: linear-gradient(
-    160deg,
-    rgba(255, 255, 255, 0.35) 0%,
-    rgba(255, 255, 255, 0.05) 40%,
-    transparent 60%
-  );
+  background: linear-gradient(160deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.05) 40%,
+      transparent 60%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -667,15 +665,13 @@ ul, ol {
 /* Light theme hello colors */
 :root,
 [data-theme="light"] {
-  --hello-gradient: linear-gradient(
-    135deg,
-    #8e9aaf 0%,
-    #a8b5c8 20%,
-    #c4d0e2 40%,
-    #d5dde8 60%,
-    #b8c5d8 80%,
-    #95a5bd 100%
-  );
+  --hello-gradient: linear-gradient(135deg,
+      #8e9aaf 0%,
+      #a8b5c8 20%,
+      #c4d0e2 40%,
+      #d5dde8 60%,
+      #b8c5d8 80%,
+      #95a5bd 100%);
   --hello-back: #6b7b94;
   --hello-mid: #8494ab;
   --hello-shadow: rgba(107, 123, 148, 0.3);
@@ -683,16 +679,14 @@ ul, ol {
 
 /* Dark theme hello colors — glossy purple/blue chrome */
 [data-theme="dark"] {
-  --hello-gradient: linear-gradient(
-    135deg,
-    #3d2d8f 0%,
-    #5b45c9 20%,
-    #7b68ee 40%,
-    #9b8df0 50%,
-    #6c5ce7 65%,
-    #4834d4 80%,
-    #3d2d8f 100%
-  );
+  --hello-gradient: linear-gradient(135deg,
+      #3d2d8f 0%,
+      #5b45c9 20%,
+      #7b68ee 40%,
+      #9b8df0 50%,
+      #6c5ce7 65%,
+      #4834d4 80%,
+      #3d2d8f 100%);
   --hello-back: #1a1040;
   --hello-mid: #2d1f6e;
   --hello-shadow: rgba(108, 92, 231, 0.5);
@@ -1052,4 +1046,3 @@ ul, ol {
     linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
 }
-

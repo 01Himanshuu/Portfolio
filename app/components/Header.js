@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme, THEME_LABELS } from './ThemeProvider';
 import { useSound } from './SoundProvider';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 /**
  * Header — Sticky top navigation bar
@@ -26,6 +27,16 @@ export default function Header() {
     setMenuOpen(false);
   }, []);
 
+  const handleNavClick = useCallback(() => {
+    playClick();
+    closeMenu();
+    try {
+      if (typeof window !== 'undefined' && ScrollTrigger) {
+        ScrollTrigger.getAll().forEach((st) => st.kill(true));
+      }
+    } catch (err) {}
+  }, [playClick, closeMenu]);
+
   // Determine active nav item
   const isActive = (path) => {
     if (path === '/' && pathname === '/') return true;
@@ -39,10 +50,7 @@ export default function Header() {
       <Link
         href="/"
         className="header-logo"
-        onClick={() => {
-          playClick();
-          closeMenu();
-        }}
+        onClick={handleNavClick}
         onMouseEnter={playHover}
       >
         HIMANSHU JANGRA©2026
@@ -53,10 +61,7 @@ export default function Header() {
         <Link
           href="/tech"
           className={`header-nav-link ${isActive('/tech') ? 'active' : ''}`}
-          onClick={() => {
-            playClick();
-            closeMenu();
-          }}
+          onClick={handleNavClick}
           onMouseEnter={playHover}
         >
           Tech
@@ -64,21 +69,15 @@ export default function Header() {
         <Link
           href="/social"
           className={`header-nav-link ${isActive('/social') ? 'active' : ''}`}
-          onClick={() => {
-            playClick();
-            closeMenu();
-          }}
+          onClick={handleNavClick}
           onMouseEnter={playHover}
         >
           Social
         </Link>
         <Link
-          href="#contact"
+          href="/#contact"
           className="header-nav-link"
-          onClick={() => {
-            playClick();
-            closeMenu();
-          }}
+          onClick={handleNavClick}
           onMouseEnter={playHover}
         >
           Contact
