@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import LayoutContainer from './LayoutContainer';
 
 /**
  * IntroductionSection — Haoqi.design-inspired two-column Introduction Section
@@ -194,7 +195,7 @@ export default function IntroductionSection() {
     <section
       id="introduction-section"
       ref={sectionRef}
-      className="relative z-30 w-full min-h-screen flex items-center py-24 px-6 md:px-12 lg:px-20 overflow-hidden bg-[#0a0a0a]"
+      className="relative z-30 w-full min-h-screen flex items-center py-24 md:py-36 overflow-hidden bg-[#0a0a0a]"
       aria-label="Introduction"
     >
       {/* Subtle atmospheric purple/violet background glows for seamless theme continuity */}
@@ -207,7 +208,7 @@ export default function IntroductionSection() {
         aria-hidden="true"
       />
 
-      <div className="max-w-[1536px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
+      <LayoutContainer className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
         {/* LEFT COLUMN: Compact Portrait + Cursive Signature + Technical Metadata */}
         <div className="lg:col-span-5 relative flex flex-col items-center lg:items-start">
           {/* Portrait Frame */}
@@ -350,7 +351,7 @@ export default function IntroductionSection() {
             </p>
           </div>
         </div>
-      </div>
+      </LayoutContainer>
     </section>
   );
 }

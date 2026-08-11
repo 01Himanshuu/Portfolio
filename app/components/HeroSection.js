@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from 'react';
 import { useSound } from './SoundProvider';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import LayoutContainer from './LayoutContainer';
 
 /**
  * HelloTubeSVG — Awwwards-style inflated glossy tube 3D SVG word 'hello'
@@ -579,7 +580,7 @@ export default function HeroSection() {
         />
 
         {/* Hero text content — corner positioned like haoqi.design */}
-        <div className="hero-content">
+        <LayoutContainer className="hero-content">
           {/* Top-left: Role/subtitle with Magnetic 3D hover tilt */}
           <MagneticHeading className="hero-role" maxTilt={8}>
             <h2>Tech &<br />Social Media<br /></h2>
@@ -609,7 +610,7 @@ export default function HeroSection() {
               CONTENT CREATOR
             </h1>
           </div>
-        </div>
+        </LayoutContainer>
       </div>
     </section>
   );

@@ -9,6 +9,8 @@ import ScrollProgress from "./components/ScrollProgress";
 import Header from "./components/Header";
 import StatusBar from "./components/StatusBar";
 import NavigationCleanup from "./components/NavigationCleanup";
+import CinematicSectionTransitions from "./components/CinematicSectionTransitions";
+import DynamicBackgroundEngine from "./components/DynamicBackgroundEngine";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -51,12 +53,68 @@ const syne = Syne({
 });
 
 export const metadata = {
-  title: "HIMANSHU JANGRA©2026",
+  metadataBase: new URL("https://himanshuu.dev"),
+  title: {
+    default: "HIMANSHU JANGRA © 2026 // Software Developer & Cinematic Director",
+    template: "%s | HIMANSHU JANGRA",
+  },
   description:
-    "Himanshu Jangra — Software Developer & Content Creator. Explore my tech and social media portfolios.",
-  keywords:
-    "Himanshu Jangra, portfolio, developer, content creator, full-stack, AI, mobile, cybersecurity",
-  author: "Himanshu Jangra",
+    "Himanshu Jangra — Software Engineer & Cinematic Storyteller. Bridging high-performance engineering platforms with 8K RAW cinema.",
+  keywords: [
+    "Himanshu Jangra",
+    "portfolio",
+    "software developer",
+    "cinematic director",
+    "Next.js",
+    "TypeScript",
+    "WebGL",
+    "AI Systems",
+    "motion design",
+  ],
+  authors: [{ name: "Himanshu Jangra", url: "https://github.com/01himanshuu" }],
+  creator: "Himanshu Jangra",
+  publisher: "Himanshu Jangra",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://himanshuu.dev",
+    title: "HIMANSHU JANGRA © 2026 // Where Code Meets Creativity",
+    description:
+      "Bridging high-performance engineering platforms with 8K RAW cinematic storytelling.",
+    siteName: "HIMANSHU JANGRA PORTFOLIO",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Himanshu Jangra Portfolio — Software Engineer & Cinematic Storyteller",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HIMANSHU JANGRA © 2026 // Software Developer & Cinematic Director",
+    description:
+      "Bridging high-performance engineering platforms with 8K RAW cinematic storytelling.",
+    creator: "@_01_himanshu",
+    images: ["/og-image.jpg"],
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -71,11 +129,12 @@ export default function RootLayout({ children }) {
           <ThemeProvider>
             <SmoothScroll>
               <div className="noise-overlay" aria-hidden="true" />
-              <div className="grid-background" aria-hidden="true" />
               <GridBackground />
+              <DynamicBackgroundEngine />
               <CursorGlow />
               <ScrollProgress />
               <NavigationCleanup />
+              <CinematicSectionTransitions />
               <Header />
               <main className="relative z-[2]">{children}</main>
               <StatusBar />

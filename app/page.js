@@ -5,8 +5,7 @@ import BuildSection from './components/build/BuildSection';
 import CreatorSection from './components/creator/CreatorSection';
 import MergeSection from './components/merge/MergeSection';
 import ContactSection from './components/contact/ContactSection';
-// import InteractiveScrollShowcase from './components/InteractiveScrollShowcase';
-
+import Footer from './components/Footer';
 /**
  * Landing Page — Clean State Simplified
  * Consists of:
@@ -25,7 +24,7 @@ export default function Home() {
       <CreatorSection />
       <MergeSection />
       <ContactSection />
-      {/* <InteractiveScrollShowcase /> -- Temporarily disabled for clean state */}
+      <Footer />
     </>
   );
 }

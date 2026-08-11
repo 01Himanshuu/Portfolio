@@ -1046,3 +1046,636 @@ ol {
     linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
 }
+
+/* ============================================================
+   CINEMATIC ANIMATION KEYFRAMES
+   Used by terminal cursor, word-reveal bloom moments
+   ============================================================ */
+
+/* Blinking terminal cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.cursor-blink {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+}
+
+/* Bloom pulse — GSAP controls opacity/scale directly;
+   this class is a fallback for CSS-only contexts */
+@keyframes bloomPulse {
+  0%   { opacity: 0;    transform: scale(0.8); }
+  40%  { opacity: 0.45; transform: scale(1.1); }
+  100% { opacity: 0;    transform: scale(1.5); }
+}
+
+.bloom-pulse {
+  animation: bloomPulse 0.85s ease-out forwards;
+  pointer-events: none;
+}
+
+/* ============================================================
+   DESIGN TOKEN NORMALIZATION (PHASE 6: HARMONIC PORTFOLIO)
+   Normalizes container width, grid, spacing, typography,
+   window styles, hover timing, animation duration, easing,
+   padding, and margins across every section of the portfolio.
+   ============================================================ */
+
+:root {
+  /* Normalized Layout & Container Tokens */
+  --norm-container-width: 1360px;
+  --norm-container-padding-desktop: 96px;
+  --norm-container-padding-laptop: 64px;
+  --norm-container-padding-tablet: 40px;
+  --norm-container-padding-mobile: 24px;
+
+  /* Normalized Spacing & Margins */
+  --norm-section-padding-y: 9rem;
+  --norm-card-gap: 1.5rem;
+  --norm-margin-bottom: 4rem;
+
+  /* Normalized Window & UI Frame Styles */
+  --norm-window-radius: 1.5rem;
+  --norm-window-border: rgba(255, 255, 255, 0.15);
+  --norm-window-bg: rgba(10, 10, 12, 0.90);
+  --norm-window-shadow: 0 0 80px rgba(0, 0, 0, 0.85);
+
+  /* Normalized Motion & Hover Timing */
+  --norm-hover-duration: 300ms;
+  --norm-hover-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --norm-anim-duration: 1.0s;
+  --norm-anim-ease: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Normalized Utility Classes */
+.norm-window-frame {
+  border-radius: var(--norm-window-radius);
+  border: 1px solid var(--norm-window-border);
+  background: var(--norm-window-bg);
+  backdrop-filter: blur(24px);
+  box-shadow: var(--norm-window-shadow);
+  transition: all var(--norm-hover-duration) var(--norm-hover-ease);
+}
+
+.norm-hover-glow {
+  transition: all var(--norm-hover-duration) var(--norm-hover-ease);
+}
+.norm-hover-glow:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   ACCESSIBILITY & KEYBOARD NAVIGATION STANDARDS (FINAL AUDIT)
+   ============================================================ */
+
+/* High-contrast focus visible ring for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #00F0FF !important;
+  outline-offset: 4px !important;
+  transition: outline-offset 0.15s ease;
+}
+
+/* Ensure accessible button cursors and tap targets */
+button,
+a[href],
+input,
+select,
+textarea {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* Ensure responsive image optimization defaults */
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  NEW DESIGN SYSTEM — Post-Introduction Foundations             ║
+   ║  Everything below this line powers sections AFTER Introduction ║
+   ║  Hero and Introduction remain 100% untouched                   ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
+/* ============================================================
+   DS: GLOBAL CONTENT GRID
+   The invisible spatial backbone for every post-intro section.
+   ============================================================ */
+
+:root {
+  /* Page-level constraints */
+  --ds-page-max-width: 1360px;
+  --ds-page-padding: clamp(24px, 5vw, 96px);
+
+  /* Vertical rhythm between major sections */
+  --ds-section-gap: clamp(96px, 12vh, 200px);
+
+  /* Gap between sibling layout elements (columns, rows) */
+  --ds-grid-gap: clamp(32px, 4vw, 64px);
+
+  /* Gap between window/card siblings — always visible breathing room */
+  --ds-window-gap: clamp(24px, 3vw, 48px);
+
+  /* Internal content padding inside cards, windows, containers */
+  --ds-content-padding: clamp(20px, 2.5vw, 40px);
+
+  /* Small spacing for tight element groups */
+  --ds-gap-xs: clamp(8px, 1vw, 12px);
+  --ds-gap-sm: clamp(12px, 1.5vw, 20px);
+  --ds-gap-md: clamp(20px, 2vw, 32px);
+  --ds-gap-lg: clamp(40px, 5vw, 72px);
+}
+
+/* ============================================================
+   DS: SECTION CONTAINER
+   Replaces ad-hoc max-width/padding per section.
+   Used via the <SectionContainer> React component.
+   ============================================================ */
+
+.ds-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* Vertical padding uses the section gap token for consistent rhythm */
+  padding-block: var(--ds-section-gap);
+}
+
+.ds-section--full-height {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ds-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--ds-page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--ds-page-padding);
+}
+
+/* ============================================================
+   DS: TYPOGRAPHY SCALE
+   Clear hierarchy. Large type reserved for moments that matter.
+   ============================================================ */
+
+:root {
+  /* Display — scene-opening impact moments ONLY */
+  --ds-font-display: clamp(3rem, 8vw, 7.5rem);
+  --ds-font-display-weight: 800;
+  --ds-font-display-tracking: -0.04em;
+  --ds-font-display-leading: 0.92;
+
+  /* Section title — sub-scene headings */
+  --ds-font-section: clamp(1.8rem, 3.5vw, 3rem);
+  --ds-font-section-weight: 700;
+  --ds-font-section-tracking: -0.025em;
+  --ds-font-section-leading: 1.1;
+
+  /* Project title — project names, card headings */
+  --ds-font-project: clamp(1.25rem, 2vw, 1.75rem);
+  --ds-font-project-weight: 700;
+  --ds-font-project-tracking: -0.02em;
+  --ds-font-project-leading: 1.2;
+
+  /* Body — comfortable reading */
+  --ds-font-body: clamp(0.95rem, 1.2vw, 1.15rem);
+  --ds-font-body-weight: 400;
+  --ds-font-body-leading: 1.7;
+
+  /* Metadata — secondary information, descriptions */
+  --ds-font-meta: clamp(0.82rem, 1vw, 0.95rem);
+  --ds-font-meta-weight: 400;
+  --ds-font-meta-leading: 1.6;
+
+  /* Label — mono technical markers, chapter numbers */
+  --ds-font-label: clamp(0.68rem, 0.8vw, 0.78rem);
+  --ds-font-label-weight: 500;
+  --ds-font-label-tracking: 0.1em;
+  --ds-font-label-leading: 1.4;
+}
+
+/* Typography utility classes */
+.ds-display {
+  font-family: var(--font-manrope), var(--font-inter), sans-serif;
+  font-size: var(--ds-font-display);
+  font-weight: var(--ds-font-display-weight);
+  letter-spacing: var(--ds-font-display-tracking);
+  line-height: var(--ds-font-display-leading);
+  text-transform: uppercase;
+}
+
+.ds-section-title {
+  font-family: var(--font-inter), sans-serif;
+  font-size: var(--ds-font-section);
+  font-weight: var(--ds-font-section-weight);
+  letter-spacing: var(--ds-font-section-tracking);
+  line-height: var(--ds-font-section-leading);
+}
+
+.ds-project-title {
+  font-family: var(--font-inter), sans-serif;
+  font-size: var(--ds-font-project);
+  font-weight: var(--ds-font-project-weight);
+  letter-spacing: var(--ds-font-project-tracking);
+  line-height: var(--ds-font-project-leading);
+}
+
+.ds-body {
+  font-family: var(--font-inter), sans-serif;
+  font-size: var(--ds-font-body);
+  font-weight: var(--ds-font-body-weight);
+  line-height: var(--ds-font-body-leading);
+  color: var(--ds-fg-secondary);
+}
+
+.ds-meta {
+  font-family: var(--font-inter), sans-serif;
+  font-size: var(--ds-font-meta);
+  font-weight: var(--ds-font-meta-weight);
+  line-height: var(--ds-font-meta-leading);
+  color: var(--ds-fg-muted);
+}
+
+.ds-label {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: var(--ds-font-label);
+  font-weight: var(--ds-font-label-weight);
+  letter-spacing: var(--ds-font-label-tracking);
+  line-height: var(--ds-font-label-leading);
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   DS: COLOR PALETTE
+   Restrained. Accent communicates identity/interaction, not decoration.
+   ============================================================ */
+
+:root {
+  /* Backgrounds */
+  --ds-bg-deep: #050507;
+  --ds-bg-surface: #0a0a0c;
+  --ds-bg-elevated: #111114;
+  --ds-bg-subtle: #18181c;
+
+  /* Foreground */
+  --ds-fg-primary: #f0f0f0;
+  --ds-fg-secondary: #999999;
+  --ds-fg-muted: #5a5a5a;
+  --ds-fg-faint: #333333;
+
+  /* Identity accents — engineering */
+  --ds-accent-eng: #00F0FF;
+  --ds-accent-eng-muted: rgba(0, 240, 255, 0.15);
+  --ds-accent-eng-glow: rgba(0, 240, 255, 0.08);
+  --ds-accent-eng-border: rgba(0, 240, 255, 0.20);
+
+  /* Identity accents — creative */
+  --ds-accent-cre: #C084FC;
+  --ds-accent-cre-muted: rgba(192, 132, 252, 0.15);
+  --ds-accent-cre-glow: rgba(192, 132, 252, 0.08);
+  --ds-accent-cre-border: rgba(192, 132, 252, 0.20);
+
+  /* Convergence / synthesis */
+  --ds-accent-warm: #F5E6D3;
+
+  /* Interaction highlight */
+  --ds-accent-lime: #C8FF00;
+
+  /* Borders */
+  --ds-border-subtle: rgba(255, 255, 255, 0.06);
+  --ds-border-default: rgba(255, 255, 255, 0.10);
+  --ds-border-strong: rgba(255, 255, 255, 0.18);
+}
+
+/* ============================================================
+   DS: WINDOW SYSTEM (Authentic macOS)
+   Used sparingly. ONE reusable component. Never decorative.
+   ============================================================ */
+
+:root {
+  --ds-win-radius: 12px;
+  --ds-win-border: 1px solid var(--ds-border-default);
+  --ds-win-bg: rgba(10, 10, 14, 0.92);
+  --ds-win-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.08),
+    0 4px 8px rgba(0, 0, 0, 0.12),
+    0 12px 36px rgba(0, 0, 0, 0.35),
+    0 24px 64px rgba(0, 0, 0, 0.25);
+  --ds-win-titlebar-height: 40px;
+  --ds-win-titlebar-bg: #1a1a1e;
+  --ds-win-content-padding: clamp(16px, 2vw, 28px);
+  --ds-win-traffic-size: 12px;
+  --ds-win-traffic-gap: 8px;
+}
+
+.ds-window {
+  position: relative;
+  border-radius: var(--ds-win-radius);
+  border: var(--ds-win-border);
+  background: var(--ds-win-bg);
+  box-shadow: var(--ds-win-shadow);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.4s ease;
+}
+
+.ds-window:hover {
+  border-color: var(--ds-border-strong);
+}
+
+.ds-window--eng:hover {
+  border-color: var(--ds-accent-eng-border);
+  box-shadow:
+    var(--ds-win-shadow),
+    0 0 40px var(--ds-accent-eng-glow);
+}
+
+.ds-window--cre:hover {
+  border-color: var(--ds-accent-cre-border);
+  box-shadow:
+    var(--ds-win-shadow),
+    0 0 40px var(--ds-accent-cre-glow);
+}
+
+/* Titlebar */
+.ds-window__titlebar {
+  display: flex;
+  align-items: center;
+  height: var(--ds-win-titlebar-height);
+  padding-inline: 16px;
+  background: var(--ds-win-titlebar-bg);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  gap: var(--ds-win-traffic-gap);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* Traffic light dots */
+.ds-window__traffic {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-win-traffic-gap);
+  flex-shrink: 0;
+}
+
+.ds-window__dot {
+  width: var(--ds-win-traffic-size);
+  height: var(--ds-win-traffic-size);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ds-window__dot--close { background: #FF5F56; }
+.ds-window__dot--minimize { background: #FFBD2E; }
+.ds-window__dot--maximize { background: #27C93F; }
+
+/* Titlebar text */
+.ds-window__title {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ds-fg-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Content area — always inset from window boundary */
+.ds-window__content {
+  padding: var(--ds-win-content-padding);
+}
+
+/* Depth variants */
+.ds-window--shallow {
+  --ds-win-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.06),
+    0 4px 12px rgba(0, 0, 0, 0.12),
+    0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.ds-window--deep {
+  --ds-win-shadow:
+    0 2px 2px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.18),
+    0 24px 64px rgba(0, 0, 0, 0.45),
+    0 48px 96px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================================
+   DS: MOTION TOKENS
+   Consistent easing and duration across all new components.
+   ============================================================ */
+
+:root {
+  /* Standard ease — general UI transitions */
+  --ds-ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Dramatic ease — scroll reveals, large elements */
+  --ds-ease-dramatic: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Micro ease — tiny interactions, hover states */
+  --ds-ease-micro: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Durations */
+  --ds-duration-fast: 150ms;
+  --ds-duration-normal: 300ms;
+  --ds-duration-slow: 600ms;
+  --ds-duration-dramatic: 1000ms;
+}
+
+/* ============================================================
+   DS: REDUCED MOTION
+   Respects user preference across the entire design system.
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-window,
+  .ds-window:hover {
+    transition: none;
+  }
+
+  .ds-display,
+  .ds-section-title,
+  .ds-body {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* ============================================================
+   DS: RESPONSIVE OVERRIDES
+   Mobile-specific adjustments to the design system.
+   ============================================================ */
+
+@media (max-width: 768px) {
+  :root {
+    /* Tighten section gap on mobile for natural flow */
+    --ds-section-gap: clamp(64px, 10vh, 120px);
+
+    /* Reduce window content padding on small screens */
+    --ds-win-content-padding: 16px;
+
+    /* Smaller traffic lights */
+    --ds-win-traffic-size: 10px;
+    --ds-win-traffic-gap: 6px;
+    --ds-win-titlebar-height: 34px;
+  }
+}
+
+/* ============================================================
+   DS: MARQUEE — Infinite horizontal scroll ribbon
+   ============================================================ */
+
+@keyframes ds-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ds-marquee {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+}
+
+.ds-marquee__track {
+  display: flex;
+  gap: var(--ds-grid-gap);
+  animation: ds-marquee 40s linear infinite;
+  width: max-content;
+}
+
+.ds-marquee__track:hover {
+  animation-play-state: paused;
+}
+
+.ds-marquee__item {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border: 1px solid var(--ds-border-subtle);
+  border-radius: 100px;
+  transition: border-color var(--ds-duration-normal) var(--ds-ease-standard),
+              color var(--ds-duration-normal) var(--ds-ease-standard);
+}
+
+.ds-marquee__item:hover {
+  border-color: var(--ds-border-strong);
+}
+
+/* ============================================================
+   DS: EDITORIAL LAYOUT UTILITIES
+   ============================================================ */
+
+.ds-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ds-grid-gap);
+}
+
+@media (max-width: 768px) {
+  .ds-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ds-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--ds-border-subtle);
+  margin-block: var(--ds-gap-lg);
+}
+
+/* Project metadata grid */
+.ds-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--ds-gap-sm) var(--ds-grid-gap);
+  padding-block: var(--ds-gap-md);
+  border-top: 1px solid var(--ds-border-subtle);
+}
+
+/* Project visual placeholder */
+.ds-visual-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--ds-win-radius);
+  overflow: hidden;
+  background: var(--ds-bg-elevated);
+  border: 1px solid var(--ds-border-subtle);
+}
+
+/* Contact link cards */
+.ds-link-card {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-sm);
+  padding: var(--ds-content-padding);
+  border: 1px solid var(--ds-border-subtle);
+  border-radius: var(--ds-win-radius);
+  background: var(--ds-bg-surface);
+  transition: border-color var(--ds-duration-normal) var(--ds-ease-standard),
+              transform var(--ds-duration-normal) var(--ds-ease-standard),
+              background var(--ds-duration-normal) var(--ds-ease-standard);
+  text-decoration: none;
+  color: var(--ds-fg-primary);
+  cursor: pointer;
+}
+
+.ds-link-card:hover {
+  border-color: var(--ds-border-strong);
+  transform: translateY(-2px);
+  background: var(--ds-bg-elevated);
+}
+
+.ds-link-card__icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--ds-bg-subtle);
+}
+
+.ds-link-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Scroll indicator */
+@keyframes ds-scroll-hint {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+.ds-scroll-hint {
+  animation: ds-scroll-hint 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-marquee__track {
+    animation: none;
+  }
+  .ds-scroll-hint {
+    animation: none;
+  }
+}
