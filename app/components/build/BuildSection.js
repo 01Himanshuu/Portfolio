@@ -58,14 +58,14 @@ export default function BuildSection() {
           <div className="build-intro-text font-mono text-sm tracking-[0.3em] uppercase text-[#00F0FF] mb-8">
             01 // Engineering Case Studies
           </div>
-          
+
           <h2 className="build-intro-text text-5xl md:text-7xl lg:text-[7rem] font-black tracking-tighter uppercase leading-[0.9] mb-12 text-white">
             ENGINEERING <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-white/60">
               / SELECTED WORK
             </span>
           </h2>
-          
+
           <p className="build-intro-text text-xl md:text-3xl text-neutral-300 font-light leading-relaxed max-w-3xl">
             I build scalable web applications, AI-powered systems, and digital products with a focus on performance, clarity, and maintainable architecture.
           </p>

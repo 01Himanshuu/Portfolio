@@ -1054,8 +1054,15 @@ ol {
 
 /* Blinking terminal cursor */
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 .cursor-blink {
@@ -1066,9 +1073,20 @@ ol {
 /* Bloom pulse — GSAP controls opacity/scale directly;
    this class is a fallback for CSS-only contexts */
 @keyframes bloomPulse {
-  0%   { opacity: 0;    transform: scale(0.8); }
-  40%  { opacity: 0.45; transform: scale(1.1); }
-  100% { opacity: 0;    transform: scale(1.5); }
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  40% {
+    opacity: 0.45;
+    transform: scale(1.1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
 }
 
 .bloom-pulse {
@@ -1122,6 +1140,7 @@ ol {
 .norm-hover-glow {
   transition: all var(--norm-hover-duration) var(--norm-hover-ease);
 }
+
 .norm-hover-glow:hover {
   border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-2px);
@@ -1433,9 +1452,17 @@ video {
   flex-shrink: 0;
 }
 
-.ds-window__dot--close { background: #FF5F56; }
-.ds-window__dot--minimize { background: #FFBD2E; }
-.ds-window__dot--maximize { background: #27C93F; }
+.ds-window__dot--close {
+  background: #FF5F56;
+}
+
+.ds-window__dot--minimize {
+  background: #FFBD2E;
+}
+
+.ds-window__dot--maximize {
+  background: #27C93F;
+}
 
 /* Titlebar text */
 .ds-window__title {
@@ -1498,6 +1525,7 @@ video {
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
+
   .ds-window,
   .ds-window:hover {
     transition: none;
@@ -1536,8 +1564,13 @@ video {
    ============================================================ */
 
 @keyframes ds-marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .ds-marquee {
@@ -1570,7 +1603,7 @@ video {
   border: 1px solid var(--ds-border-subtle);
   border-radius: 100px;
   transition: border-color var(--ds-duration-normal) var(--ds-ease-standard),
-              color var(--ds-duration-normal) var(--ds-ease-standard);
+    color var(--ds-duration-normal) var(--ds-ease-standard);
 }
 
 .ds-marquee__item:hover {
@@ -1630,8 +1663,8 @@ video {
   border-radius: var(--ds-win-radius);
   background: var(--ds-bg-surface);
   transition: border-color var(--ds-duration-normal) var(--ds-ease-standard),
-              transform var(--ds-duration-normal) var(--ds-ease-standard),
-              background var(--ds-duration-normal) var(--ds-ease-standard);
+    transform var(--ds-duration-normal) var(--ds-ease-standard),
+    background var(--ds-duration-normal) var(--ds-ease-standard);
   text-decoration: none;
   color: var(--ds-fg-primary);
   cursor: pointer;
@@ -1663,8 +1696,17 @@ video {
 
 /* Scroll indicator */
 @keyframes ds-scroll-hint {
-  0%, 100% { transform: translateY(0); opacity: 0.4; }
-  50% { transform: translateY(8px); opacity: 1; }
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
 }
 
 .ds-scroll-hint {
@@ -1675,6 +1717,7 @@ video {
   .ds-marquee__track {
     animation: none;
   }
+
   .ds-scroll-hint {
     animation: none;
   }

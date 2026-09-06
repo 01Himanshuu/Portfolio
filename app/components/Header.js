@@ -128,7 +128,8 @@ export default function Header() {
           className={`header-toggle ${soundOn ? 'sound-active-pulse text-white' : 'text-neutral-500'} active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00F0FF]/80 rounded px-2 transition-all duration-300 cursor-pointer`}
           onClick={toggleSound}
           onMouseEnter={playHover}
-          aria-label="Toggle sound"
+          aria-label={soundOn ? 'Turn sound off' : 'Turn sound on'}
+          suppressHydrationWarning
         >
           SOUND[{soundOn ? 'ON' : 'OFF'}]
         </button>
