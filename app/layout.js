@@ -11,6 +11,7 @@ import StatusBar from "./components/StatusBar";
 import NavigationCleanup from "./components/NavigationCleanup";
 import CinematicSectionTransitions from "./components/CinematicSectionTransitions";
 import DynamicBackgroundEngine from "./components/DynamicBackgroundEngine";
+import InitialLoader from "./components/InitialLoader";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -124,7 +125,8 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} ${jetbrainsMono.variable} ${manrope.variable} ${ibmPlexMono.variable} ${pacifico.variable} ${syne.variable}`}
       suppressHydrationWarning
     >
-      <body>
+      <body className="overflow-x-hidden bg-[#030406]">
+        <InitialLoader />
         <SoundProvider>
           <ThemeProvider>
             <SmoothScroll>

@@ -68,8 +68,8 @@ export default function EngineeringToolkit() {
       
       {/* Editorial Header */}
       <div className="mb-20 px-6 sm:px-12 md:px-20">
-        <div className="font-mono text-xs tracking-[0.3em] uppercase text-[#00F0FF] mb-6 flex items-center gap-4">
-          <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
+        <div className="font-mono text-xs tracking-[0.3em] uppercase text-[#E6395F] mb-6 flex items-center gap-4">
+          <span className="w-2 h-2 rounded-full bg-[#E6395F] animate-pulse" />
           SYSTEM / TOOLKIT
         </div>
         <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-white">
@@ -92,7 +92,7 @@ export default function EngineeringToolkit() {
             >
               {/* Background Glow */}
               <div 
-                className={`absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.05)_0%,transparent_70%)] transition-opacity duration-700 pointer-events-none ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                className={`absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(230,57,95,0.05)_0%,transparent_70%)] transition-opacity duration-700 pointer-events-none ${isHovered ? 'opacity-100' : 'opacity-0'}`}
               />
 
               <div className="relative z-10">
@@ -101,7 +101,7 @@ export default function EngineeringToolkit() {
                   <span className="font-mono text-xs tracking-widest text-neutral-500 uppercase border border-white/10 px-2 py-1 rounded">
                     {cluster.sysId}
                   </span>
-                  <span className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${isHovered ? 'bg-[#00F0FF]' : 'bg-white/20'}`} />
+                  <span className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${isHovered ? 'bg-[#E6395F]' : 'bg-white/20'}`} />
                 </div>
 
                 {/* Cluster Title & Desc */}
@@ -120,7 +120,7 @@ export default function EngineeringToolkit() {
                 {cluster.tech.map((tech) => (
                   <span 
                     key={tech} 
-                    className={`font-mono text-xs md:text-sm tracking-wider uppercase px-4 py-2 border transition-all duration-300 ${isHovered ? 'border-[#00F0FF]/30 text-[#00F0FF] bg-[#00F0FF]/5' : 'border-white/10 text-neutral-400 bg-transparent'}`}
+                    className={`font-mono text-xs md:text-sm tracking-wider uppercase px-4 py-2 border transition-all duration-300 ${isHovered ? 'border-[#E6395F]/30 text-[#E6395F] bg-[#E6395F]/5' : 'border-white/10 text-neutral-400 bg-transparent'}`}
                   >
                     {tech}
                   </span>

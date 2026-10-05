@@ -1,12 +1,20 @@
 'use client';
 
 import React from 'react';
+import VisitorCounter from './VisitorCounter';
 
 export default function Footer() {
   return (
-    <footer className="w-full relative z-10 py-12 border-t border-white/5 bg-[#030406] text-neutral-500">
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-12 md:px-20 flex flex-col md:flex-row justify-between items-center gap-6">
-        
+    <footer className="w-full relative z-10 border-t border-white/5 bg-[#030406] text-neutral-500">
+
+      {/* Visitor Counter — sits above the footer bar, full-width centered */}
+      <div className="w-full border-b border-white/5 py-10 flex justify-center">
+        <VisitorCounter />
+      </div>
+
+      {/* Existing footer content — unchanged */}
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-12 md:px-20 pt-12 pb-24 md:py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+
         {/* Copyright */}
         <div className="font-mono text-xs tracking-widest uppercase flex flex-col gap-1 items-center md:items-start text-center md:text-left">
           <span>&copy; 2026 Himanshu</span>
@@ -25,7 +33,7 @@ export default function Footer() {
             Instagram
           </a>
         </div>
-        
+
       </div>
     </footer>
   );

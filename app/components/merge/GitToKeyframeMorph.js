@@ -17,7 +17,7 @@ const MORPH_COMMITS = [
     id: 'commit-1',
     commitHash: '#c8e714a // feat(rag): add Pinecone hybrid search',
     branch: 'main // origin/main',
-    commitColor: '#00F0FF',
+    commitColor: '#E6395F',
     keyframeTitle: '◆ KEYFRAME 01 // 00:00:00:00 -> OPACITY 100%',
     keyframeCurve: 'BÉZIER CUBIC // EASE-IN-OUT (0.4, 0.0, 0.2, 1)',
     desc: 'Initial architecture commit hash transforms into the sequence anchor keyframe. Sets initial opacity and viewport scale.',
@@ -138,7 +138,7 @@ export default function GitToKeyframeMorph() {
       {/* Interactive Morph Slider Bar */}
       <div className="p-4 sm:p-6 rounded-xl border border-white/10 bg-neutral-950/80 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
         <div className="flex items-center gap-3">
-          <span className="text-[#00F0FF] font-bold">0% GIT COMMITS</span>
+          <span className="text-[#E6395F] font-bold">0% GIT COMMITS</span>
           <span className="text-neutral-500">◄--- PROGRESS: {morphProgress}% ---►</span>
           <span className="text-[#F59E0B] font-bold">100% GOLD KEYFRAMES (◆)</span>
         </div>
@@ -152,7 +152,7 @@ export default function GitToKeyframeMorph() {
             }}
             className={`px-3 py-1 rounded border transition-colors cursor-pointer ${
               morphProgress === 0
-                ? 'bg-[#00F0FF]/20 border-[#00F0FF] text-[#00F0FF]'
+                ? 'bg-[#E6395F]/20 border-[#E6395F] text-[#E6395F]'
                 : 'bg-neutral-900 border-white/10 text-neutral-400 hover:text-white'
             }`}
           >
@@ -310,7 +310,7 @@ export default function GitToKeyframeMorph() {
 
                 <div className="flex items-center justify-between p-3 rounded-lg bg-black/60 border border-white/10">
                   <span className="text-neutral-400">REVISION HASH:</span>
-                  <span className="text-[#00F0FF] font-bold truncate max-w-[180px]">
+                  <span className="text-[#E6395F] font-bold truncate max-w-[180px]">
                     {selectedItem.commitHash.split(' // ')[0]}
                   </span>
                 </div>

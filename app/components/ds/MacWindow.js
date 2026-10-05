@@ -23,12 +23,12 @@ export default function MacWindow({
 }) {
   // Determine accent color for the title text or subtle glows
   let accentClass = 'text-neutral-400';
-  if (variant === 'eng') accentClass = 'text-[#00F0FF]';
+  if (variant === 'eng') accentClass = 'text-[#E6395F]';
   if (variant === 'cre') accentClass = 'text-[#C084FC]';
 
   return (
     <div 
-      className={`relative w-full rounded-2xl bg-[#0c0e14] border border-white/10 shadow-2xl overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] my-8 group-hover:border-white/20 group-hover:shadow-[0_0_50px_rgba(0,240,255,0.08)] ${className}`}
+      className={`relative w-full rounded-2xl bg-[#0c0e14] border border-white/10 shadow-2xl overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] my-8 group-hover:border-white/20 group-hover:shadow-[0_0_50px_rgba(230,57,95,0.08)] ${className}`}
     >
       {/* Top Chrome */}
       <div className="h-10 w-full bg-gradient-to-b from-white/[0.08] to-transparent border-b border-white/5 flex items-center px-4 relative">

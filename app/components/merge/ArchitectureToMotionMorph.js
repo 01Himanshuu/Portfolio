@@ -17,7 +17,7 @@ const SPLINE_NODES = [
     id: 'arch-1',
     archTitle: 'GLOBAL DNS // CDN EDGE MESH',
     archSub: 'GEO-ROUTING // ZERO LATENCY',
-    archColor: '#00F0FF',
+    archColor: '#E6395F',
     motionTitle: 'SHOT 01 // CRANE DOWN WIDE 24MM',
     motionSub: 'ESTABLISHING SHOT // ANAMORPHIC',
     curveType: 'BÉZIER EASE-OUT // HIGH VERTICAL ACCEL',
@@ -104,10 +104,10 @@ export default function ArchitectureToMotionMorph() {
       {/* Module Title Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-3">
-          <span className="font-mono text-xs md:text-sm tracking-widest uppercase text-[#00F0FF]">
+          <span className="font-mono text-xs md:text-sm tracking-widest uppercase text-[#E6395F]">
             {'// ARCHITECTURE_TO_MOTION // ARCH_TO_MOTION_ENGINE // CAMERA_SPLINE_v4'}
           </span>
-          <span className="h-[1px] w-12 sm:w-24 bg-gradient-to-r from-[#00F0FF]/50 to-transparent" />
+          <span className="h-[1px] w-12 sm:w-24 bg-gradient-to-r from-[#E6395F]/50 to-transparent" />
         </div>
 
         <button
@@ -117,13 +117,13 @@ export default function ArchitectureToMotionMorph() {
           disabled={isSplining}
           className={`px-4 py-1.5 rounded-full border font-mono text-xs tracking-wider transition-all duration-300 flex items-center gap-2 cursor-pointer ${
             isSplining
-              ? 'bg-[#00F0FF]/20 border-[#00F0FF] text-[#00F0FF] cursor-wait'
-              : 'bg-neutral-900/60 border-white/20 text-neutral-300 hover:border-[#00F0FF] hover:text-[#00F0FF] hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]'
+              ? 'bg-[#E6395F]/20 border-[#E6395F] text-[#E6395F] cursor-wait'
+              : 'bg-neutral-900/60 border-white/20 text-neutral-300 hover:border-[#E6395F] hover:text-[#E6395F] hover:shadow-[0_0_15px_rgba(230,57,95,0.2)]'
           }`}
         >
           <span
             className={`w-2 h-2 rounded-full ${
-              isSplining ? 'bg-[#00F0FF] animate-ping' : 'bg-[#C084FC]'
+              isSplining ? 'bg-[#E6395F] animate-ping' : 'bg-[#C084FC]'
             }`}
           />
           <span>
@@ -139,7 +139,7 @@ export default function ArchitectureToMotionMorph() {
       {/* Interactive Morph Slider Bar */}
       <div className="p-4 sm:p-6 rounded-xl border border-white/10 bg-neutral-950/80 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
         <div className="flex items-center gap-3">
-          <span className="text-[#00F0FF] font-bold">0% ARCHITECTURE DIAGRAM</span>
+          <span className="text-[#E6395F] font-bold">0% ARCHITECTURE DIAGRAM</span>
           <span className="text-neutral-500">◄--- PROGRESS: {morphProgress}% ---►</span>
           <span className="text-[#C084FC] font-bold">100% CAMERA SPLINE PATH</span>
         </div>
@@ -153,7 +153,7 @@ export default function ArchitectureToMotionMorph() {
             }}
             className={`px-3 py-1 rounded border transition-colors cursor-pointer ${
               morphProgress === 0
-                ? 'bg-[#00F0FF]/20 border-[#00F0FF] text-[#00F0FF]'
+                ? 'bg-[#E6395F]/20 border-[#E6395F] text-[#E6395F]'
                 : 'bg-neutral-900 border-white/10 text-neutral-400 hover:text-white'
             }`}
           >
@@ -191,7 +191,7 @@ export default function ArchitectureToMotionMorph() {
       </div>
 
       {/* Main Architecture/Motion Spline Window */}
-      <div className="arch-motion-window w-full rounded-2xl border border-[#00F0FF]/30 bg-neutral-950/90 backdrop-blur-2xl overflow-hidden shadow-[0_0_45px_rgba(0,240,255,0.08)]">
+      <div className="arch-motion-window w-full rounded-2xl border border-[#E6395F]/30 bg-neutral-950/90 backdrop-blur-2xl overflow-hidden shadow-[0_0_45px_rgba(230,57,95,0.08)]">
         {/* Window Header */}
         <div className="flex items-center justify-between px-6 py-3.5 border-b border-white/10 bg-neutral-900/70 font-mono text-xs">
           <div className="flex items-center gap-2.5">
@@ -285,7 +285,7 @@ export default function ArchitectureToMotionMorph() {
           <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-neutral-900/30">
             <div>
               <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/10 font-mono text-xs">
-                <span className="text-[#00F0FF] uppercase font-bold">
+                <span className="text-[#E6395F] uppercase font-bold">
                   {'// TRAJECTORY_INSPECTOR'}
                 </span>
                 <span className="text-emerald-400">● 60 FPS MOTION_LOCKED</span>
@@ -311,7 +311,7 @@ export default function ArchitectureToMotionMorph() {
 
                 <div className="flex items-center justify-between p-3 rounded-lg bg-black/60 border border-white/10">
                   <span className="text-neutral-400">SYS COMPONENT:</span>
-                  <span className="text-[#00F0FF] font-bold truncate max-w-[180px]">
+                  <span className="text-[#E6395F] font-bold truncate max-w-[180px]">
                     {selectedPoint.archTitle.split(' // ')[0]}
                   </span>
                 </div>

@@ -37,7 +37,7 @@ export default function CodeCreativityBridge() {
       </div>
       
       <h2 className="bridge-text text-4xl sm:text-6xl md:text-7xl lg:text-[6rem] font-black tracking-tighter uppercase leading-[1.1] text-white">
-        I build systems like <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-white/80">an engineer.</span>
+        I build systems like <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E6395F] to-white/80">an engineer.</span>
       </h2>
       
       <h2 className="bridge-text text-4xl sm:text-6xl md:text-7xl lg:text-[6rem] font-black tracking-tighter uppercase leading-[1.1] text-white mt-4 md:mt-8">

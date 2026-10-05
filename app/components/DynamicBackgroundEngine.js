@@ -96,7 +96,7 @@ export default function DynamicBackgroundEngine() {
         });
         tlCreate
           .to(cyan, { opacity: 0.08, scale: 0.85, x: '-25%', duration: 1 }, 0)
-          .to(purple, { opacity: 0.78, scale: 1.15, x: '5%', y: '-5%', duration: 1 }, 0)
+          .to(purple, { opacity: 0.40, scale: 1.0, x: '5%', y: '-5%', duration: 1 }, 0)
           .to(combined, { opacity: 0, scale: 0.9, duration: 1 }, 0);
         timelines.push(tlCreate);
       }
@@ -113,8 +113,8 @@ export default function DynamicBackgroundEngine() {
         });
         tlMerge
           .to(cyan, { opacity: 0.45, scale: 1.05, x: '-18%', y: '0%', duration: 1 }, 0)
-          .to(purple, { opacity: 0.45, scale: 1.05, x: '18%', y: '0%', duration: 1 }, 0)
-          .to(combined, { opacity: 0.88, scale: 1.2, duration: 1 }, 0);
+          .to(purple, { opacity: 0.20, scale: 1.0, x: '18%', y: '0%', duration: 1 }, 0)
+          .to(combined, { opacity: 0.45, scale: 1.05, duration: 1 }, 0);
         timelines.push(tlMerge);
       }
 
@@ -129,9 +129,9 @@ export default function DynamicBackgroundEngine() {
           },
         });
         tlContact
-          .to(cyan, { opacity: 0.05, scale: 0.9, x: '0%', duration: 1 }, 0)
-          .to(purple, { opacity: 0.05, scale: 0.9, x: '0%', duration: 1 }, 0)
-          .to(combined, { opacity: 0.08, scale: 0.9, duration: 1 }, 0);
+          .to(cyan, { opacity: 0, scale: 0.9, x: '0%', duration: 1 }, 0)
+          .to(purple, { opacity: 0, scale: 0.9, x: '0%', duration: 1 }, 0)
+          .to(combined, { opacity: 0, scale: 0.9, duration: 1 }, 0);
         timelines.push(tlContact);
       }
 
@@ -152,13 +152,13 @@ export default function DynamicBackgroundEngine() {
       className="fixed inset-0 z-[1] pointer-events-none overflow-hidden select-none"
       aria-hidden="true"
     >
-      {/* 1. Cyan Atmosphere Layer — Electric Cyan & Neon Blue (#00F0FF, #0077FF) */}
+      {/* 1. Cherry-Red Atmosphere Layer — Crimson & Deep Red (#E6395F, #A3163A) */}
       <div
         ref={cyanLayerRef}
         className="absolute -top-32 -left-32 w-[750px] h-[750px] rounded-full opacity-0 pointer-events-none transition-opacity"
         style={{
           background:
-            'radial-gradient(circle, rgba(0, 240, 255, 0.22) 0%, rgba(0, 119, 255, 0.12) 45%, transparent 70%)',
+            'radial-gradient(circle, rgba(230, 57, 95, 0.22) 0%, rgba(163, 22, 58, 0.12) 45%, transparent 70%)',
           filter: 'blur(110px)',
         }}
       />
@@ -174,13 +174,13 @@ export default function DynamicBackgroundEngine() {
         }}
       />
 
-      {/* 3. Combined Atmosphere Layer — Iridescent Cyan + Purple Synthesis */}
+      {/* 3. Combined Atmosphere Layer — Iridescent Cherry-Red + Purple Synthesis */}
       <div
         ref={combinedLayerRef}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] rounded-full opacity-0 pointer-events-none transition-opacity"
         style={{
           background:
-            'radial-gradient(circle, rgba(168, 85, 247, 0.26) 0%, rgba(0, 240, 255, 0.18) 40%, rgba(232, 121, 249, 0.12) 65%, transparent 80%)',
+            'radial-gradient(circle, rgba(168, 85, 247, 0.26) 0%, rgba(230, 57, 95, 0.18) 40%, rgba(232, 121, 249, 0.12) 65%, transparent 80%)',
           filter: 'blur(130px)',
         }}
       />

@@ -6,6 +6,7 @@ import CreatorSection from './components/creator/CreatorSection';
 import MergeSection from './components/merge/MergeSection';
 import ContactSection from './components/contact/ContactSection';
 import Footer from './components/Footer';
+import CinematicWipeOverlay from './components/CinematicWipeOverlay';
 /**
  * Landing Page — Clean State Simplified
  * Consists of:
@@ -25,6 +26,7 @@ export default function Home() {
       <MergeSection />
       <ContactSection />
       <Footer />
+      <CinematicWipeOverlay />
     </>
   );
 }

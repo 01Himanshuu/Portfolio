@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# visitor counter — live count should not be committed/reset on deploy
+/data/visitors.json

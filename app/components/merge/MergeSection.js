@@ -82,12 +82,9 @@ export default function MergeSection() {
     <section
       id="merge"
       ref={sectionRef}
-      className="ds-section ds-section--full-height"
+      className="w-full relative py-32 md:py-64 flex flex-col justify-center items-center"
       style={{
         background: 'var(--ds-bg-deep)',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
       }}
       aria-label="Where code meets creativity"
     >

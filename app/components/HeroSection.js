@@ -253,8 +253,24 @@ function FloatingSticker({
   const targetOffsetRef = useRef({ x: 0, y: 0, rotate: 0 });
   const offsetRef = useRef({ x: 0, y: 0, rotate: 0 });
   const startTimeRef = useRef(null);
+  
+  const [canDrop, setCanDrop] = useState(false);
 
   useEffect(() => {
+    if (sessionStorage.getItem('hasLoadedBefore')) {
+      setTimeout(() => setCanDrop(true), 0);
+    } else {
+      const handleLoaderComplete = () => {
+        setCanDrop(true);
+      };
+      window.addEventListener('loaderComplete', handleLoaderComplete);
+      return () => window.removeEventListener('loaderComplete', handleLoaderComplete);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!canDrop) return; // Do not initialize physics until loader finishes
+
     let rafId;
 
     const onMouseMove = (e) => {
@@ -338,7 +354,7 @@ function FloatingSticker({
       window.removeEventListener('mousemove', onMouseMove);
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [speed, delay, initialRotate]);
+  }, [speed, delay, initialRotate, canDrop]);
 
   const onClick = () => {
     playClick();
@@ -357,6 +373,7 @@ function FloatingSticker({
         height: size,
         zIndex: 2,
         cursor: 'pointer',
+        transform: canDrop ? undefined : `translate3d(0, -950px, 0) rotate(${initialRotate - 38}deg) scale(1.15)`
       }}
       onMouseEnter={playStickerPop}
       onClick={onClick}
@@ -592,7 +609,7 @@ export default function HeroSection() {
           </div>
 
           {/* Top-right: Description */}
-          <div className="hero-bio">
+          <div className="hero-bio relative z-20 max-md:bg-black/20 max-md:backdrop-blur-md max-md:p-4 max-md:rounded-2xl">
             <p>
               I&apos;m Himanshu Jangra, a software developer and
               content creator crafting digital experiences
@@ -603,7 +620,7 @@ export default function HeroSection() {
           </div>
 
           {/* Bottom-left: Main title — wide architectural Manrope ExtraBold font, completely still */}
-          <div className="hero-title-wrapper">
+          <div className="hero-title-wrapper pb-24 md:pb-0">
             <h1 className="hero-title">
               SOFTWARE<br />
               DEVELOPER &amp;<br />

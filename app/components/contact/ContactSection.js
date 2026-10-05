@@ -79,9 +79,9 @@ export default function ContactSection() {
       </div>
 
       <h2 className="contact-reveal text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] font-black tracking-tighter uppercase leading-[0.9] text-white mb-8">
-        LET'S BUILD<br />
+        LET&apos;S BUILD<br />
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-500 to-white">SOMETHING</span><br />
-        <span className="text-[#00F0FF]">WORTH SHIPPING.</span>
+        <span className="text-[#E6395F]">WORTH SHIPPING.</span>
       </h2>
 
       <div className="contact-reveal mt-16 mb-24 flex flex-wrap justify-center gap-4 md:gap-8">
@@ -99,7 +99,7 @@ export default function ContactSection() {
             {method.copyable && (
               <button
                 onClick={(e) => handleCopy(e, method)}
-                className="absolute -bottom-8 opacity-0 group-hover:opacity-100 font-mono text-[10px] tracking-widest text-neutral-500 hover:text-[#00F0FF] transition-all transform translate-y-2 group-hover:translate-y-0"
+                className="absolute -bottom-8 opacity-0 group-hover:opacity-100 font-mono text-[10px] tracking-widest text-neutral-500 hover:text-[#E6395F] transition-all transform translate-y-2 group-hover:translate-y-0"
               >
                 {copiedId === method.id ? 'COPIED ✓' : '[ COPY ]'}
               </button>
@@ -111,7 +111,7 @@ export default function ContactSection() {
       <div className="contact-reveal">
         <a
           href="mailto:jangrahimanshu0101@gmail.com"
-          className="group relative inline-flex items-center justify-center px-8 py-4 font-mono text-sm tracking-[0.2em] text-[#030406] uppercase bg-white hover:bg-neutral-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00F0FF]"
+          className="group relative inline-flex items-center justify-center px-8 py-4 font-mono text-sm tracking-[0.2em] text-[#030406] uppercase bg-white hover:bg-neutral-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6395F]"
         >
           <span>START A CONVERSATION</span>
           <span className="ml-4 transform group-hover:translate-x-2 transition-transform duration-300">&rarr;</span>

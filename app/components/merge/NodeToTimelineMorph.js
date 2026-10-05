@@ -17,7 +17,7 @@ const MORPH_NODES = [
     id: 'node-1',
     nodeName: 'NODE 01: GRAPHQL FEDERATED GATEWAY',
     nodeType: 'API_ROUTING // ZERO_TRUST_AUTH',
-    nodeColor: '#00F0FF',
+    nodeColor: '#E6395F',
     timelineTrack: 'V1 // MAIN_REEL_MASTER [00:00:00 -> 00:00:28]',
     timelineRole: 'VIDEO SEQUENCE // ANAMORPHIC_8K',
     desc: 'Backend API requests morph into sequential video clip frames. Sub-second request routing synchronizes directly with 60 FPS video playback.',
@@ -138,7 +138,7 @@ export default function NodeToTimelineMorph() {
       {/* Interactive Morph Control Slider */}
       <div className="p-4 sm:p-6 rounded-xl border border-white/10 bg-neutral-950/80 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
         <div className="flex items-center gap-3">
-          <span className="text-[#00F0FF] font-bold">0% NODE GRAPH</span>
+          <span className="text-[#E6395F] font-bold">0% NODE GRAPH</span>
           <span className="text-neutral-500">◄--- PROGRESS: {morphProgress}% ---►</span>
           <span className="text-[#C084FC] font-bold">100% NLE TIMELINE</span>
         </div>
@@ -152,7 +152,7 @@ export default function NodeToTimelineMorph() {
             }}
             className={`px-3 py-1 rounded border transition-colors cursor-pointer ${
               morphProgress === 0
-                ? 'bg-[#00F0FF]/20 border-[#00F0FF] text-[#00F0FF]'
+                ? 'bg-[#E6395F]/20 border-[#E6395F] text-[#E6395F]'
                 : 'bg-neutral-900 border-white/10 text-neutral-400 hover:text-white'
             }`}
           >
@@ -292,7 +292,7 @@ export default function NodeToTimelineMorph() {
               </div>
 
               <div className="mb-6">
-                <span className="font-mono text-xs text-[#00F0FF] font-bold block mb-1">
+                <span className="font-mono text-xs text-[#E6395F] font-bold block mb-1">
                   {morphProgress < 50 ? selectedNode.nodeName : selectedNode.timelineTrack}
                 </span>
                 <h3 className="text-xl font-bold text-white mb-2">
@@ -311,7 +311,7 @@ export default function NodeToTimelineMorph() {
 
                 <div className="flex items-center justify-between p-3 rounded-lg bg-black/60 border border-white/10">
                   <span className="text-neutral-400">ENGINEERING LAYER:</span>
-                  <span className="text-[#00F0FF] font-bold truncate max-w-[180px]">
+                  <span className="text-[#E6395F] font-bold truncate max-w-[180px]">
                     {selectedNode.nodeName.split(': ')[1]}
                   </span>
                 </div>

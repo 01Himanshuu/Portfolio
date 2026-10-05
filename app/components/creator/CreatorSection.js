@@ -22,7 +22,7 @@ export default function CreatorSection() {
     const ctx = gsap.context(() => {
       // Background Color Shift (Cyan -> Purple/Magenta)
       gsap.to(bgRef.current, {
-        opacity: 0.15, // Reveal purple noise/grid
+        opacity: 0.05, // Subtle purple noise/grid
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top center',
@@ -39,7 +39,7 @@ export default function CreatorSection() {
     <section
       id="creative-studio"
       ref={sectionRef}
-      className="relative w-full bg-[#06080c] text-white overflow-hidden pt-32"
+      className="relative w-full bg-[#06080c] text-white overflow-hidden py-32 md:py-64"
     >
       {/* Dynamic Purple Grid Background */}
       <div

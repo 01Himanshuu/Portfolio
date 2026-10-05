@@ -91,7 +91,7 @@ export default function MergeClimaxCore() {
       {/* Interactive Convergence Balance Slider */}
       <div className="p-5 rounded-2xl border border-white/10 bg-neutral-950/80 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
         <div className="flex items-center gap-3">
-          <span className="text-[#00F0FF] font-bold">ENGINEERING CORE</span>
+          <span className="text-[#E6395F] font-bold">ENGINEERING CORE</span>
           <span className="text-neutral-500">
             ◄-- BALANCE: {balance < 40 ? 'ENGINEERING DOMINANT' : balance > 60 ? 'CREATIVE DOMINANT' : '100% CONVERGED EQUILIBRIUM'} --►
           </span>
@@ -107,7 +107,7 @@ export default function MergeClimaxCore() {
             }}
             className={`px-3 py-1 rounded border transition-colors cursor-pointer ${
               balance < 40
-                ? 'bg-[#00F0FF]/20 border-[#00F0FF] text-[#00F0FF]'
+                ? 'bg-[#E6395F]/20 border-[#E6395F] text-[#E6395F]'
                 : 'bg-neutral-900 border-white/10 text-neutral-400 hover:text-white'
             }`}
           >
@@ -151,9 +151,9 @@ export default function MergeClimaxCore() {
           className="climax-core-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] rounded-full blur-[140px] pointer-events-none transition-all duration-700"
           style={{
             background: isUnified
-              ? 'radial-gradient(circle, rgba(251,191,36,0.25) 0%, rgba(0,240,255,0.18) 50%, rgba(192,132,252,0.18) 100%)'
+              ? 'radial-gradient(circle, rgba(251,191,36,0.25) 0%, rgba(230,57,95,0.18) 50%, rgba(192,132,252,0.18) 100%)'
               : balance < 40
-              ? 'radial-gradient(circle, rgba(0,240,255,0.35) 0%, transparent 70%)'
+              ? 'radial-gradient(circle, rgba(230,57,95,0.35) 0%, transparent 70%)'
               : 'radial-gradient(circle, rgba(192,132,252,0.35) 0%, transparent 70%)',
           }}
         />
@@ -164,11 +164,11 @@ export default function MergeClimaxCore() {
           <div
             className={`p-6 rounded-2xl border transition-all duration-500 ${
               balance < 40 || isUnified
-                ? 'bg-neutral-900/80 border-[#00F0FF]/60 shadow-[0_0_30px_rgba(0,240,255,0.18)]'
+                ? 'bg-neutral-900/80 border-[#E6395F]/60 shadow-[0_0_30px_rgba(230,57,95,0.18)]'
                 : 'bg-neutral-900/40 border-white/10 opacity-60'
             }`}
           >
-            <div className="font-mono text-xs text-[#00F0FF] font-bold tracking-wider uppercase mb-2">
+            <div className="font-mono text-xs text-[#E6395F] font-bold tracking-wider uppercase mb-2">
               {'// WORLD 01'}
             </div>
             <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2 font-sans">
@@ -178,9 +178,9 @@ export default function MergeClimaxCore() {
               TypeScript, WebGL Shaders, Next.js 16, GraphQL Federation, and Agentic RAG Systems.
             </p>
             <div className="flex flex-wrap justify-center gap-1.5 font-mono text-[10px]">
-              <span className="px-2 py-0.5 rounded bg-[#00F0FF]/15 text-[#00F0FF]">LOGIC</span>
-              <span className="px-2 py-0.5 rounded bg-[#00F0FF]/15 text-[#00F0FF]">PERFORMANCE</span>
-              <span className="px-2 py-0.5 rounded bg-[#00F0FF]/15 text-[#00F0FF]">ARCHITECTURE</span>
+              <span className="px-2 py-0.5 rounded bg-[#E6395F]/15 text-[#E6395F]">LOGIC</span>
+              <span className="px-2 py-0.5 rounded bg-[#E6395F]/15 text-[#E6395F]">PERFORMANCE</span>
+              <span className="px-2 py-0.5 rounded bg-[#E6395F]/15 text-[#E6395F]">ARCHITECTURE</span>
             </div>
           </div>
 
@@ -237,7 +237,7 @@ export default function MergeClimaxCore() {
 
           <div className="flex flex-wrap items-center justify-center gap-6 font-mono text-xs text-neutral-400">
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#00F0FF]" />
+              <span className="w-2 h-2 rounded-full bg-[#E6395F]" />
               <span>CODE TO FRAME: ZERO LATENCY</span>
             </span>
             <span className="flex items-center gap-2">

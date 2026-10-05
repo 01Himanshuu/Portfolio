@@ -36,7 +36,7 @@ const CONTACT_LINKS = [
     value: '01himanshu',
     href: 'https://linkedin.com/in/01himanshu',
     display: 'linkedin.com/in/01himanshu',
-    accent: '#00F0FF',
+    accent: '#E6395F',
     tag: 'PROFESSIONAL // NETWORK',
   },
   {
@@ -146,13 +146,13 @@ export default function CollaborateTerminal() {
       <div className="p-6 sm:p-10 md:p-12 space-y-8">
         <div className="font-mono text-sm sm:text-base space-y-2">
           <div className="flex items-center gap-2 text-white">
-            <span className="text-[#00F0FF]">visitor@himanshu-jangra:~$</span>
+            <span className="text-[#E6395F]">visitor@himanshu-jangra:~$</span>
             <span className="font-bold tracking-wide">{typedCommand}</span>
             <span className="w-2.5 h-5 bg-white/80 animate-pulse inline-block align-middle" />
           </div>
 
           {showStatus && (
-            <div className="text-neutral-400 pl-4 border-l-2 border-[#00F0FF]/40 space-y-1 animate-fadeIn">
+            <div className="text-neutral-400 pl-4 border-l-2 border-[#E6395F]/40 space-y-1 animate-fadeIn">
               <p className="text-xs text-neutral-500">
                 {'// INITIALIZING DIRECT STREAM... OK.'}
               </p>
@@ -232,17 +232,17 @@ export default function CollaborateTerminal() {
               href="/tech"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="group p-5 rounded-2xl border border-[#00F0FF]/40 bg-[#00F0FF]/10 hover:bg-[#00F0FF]/20 hover:border-[#00F0FF] transition-all duration-300 ease-out flex items-center justify-between text-left shadow-[0_0_25px_rgba(0,240,255,0.08)]"
+              className="group p-5 rounded-2xl border border-[#E6395F]/40 bg-[#E6395F]/10 hover:bg-[#E6395F]/20 hover:border-[#E6395F] transition-all duration-300 ease-out flex items-center justify-between text-left shadow-[0_0_25px_rgba(230,57,95,0.08)]"
             >
               <div>
-                <div className="flex items-center gap-2 font-mono text-xs text-[#00F0FF] font-bold uppercase mb-1">
+                <div className="flex items-center gap-2 font-mono text-xs text-[#E6395F] font-bold uppercase mb-1">
                   <span>📄 SOFTWARE ENGINEERING RESUME</span>
                 </div>
                 <p className="text-xs text-neutral-300 font-light">
                   TypeScript, WebGL, Next.js 16, GraphQL, AI Agent Systems &amp; Performance
                 </p>
               </div>
-              <span className="text-lg text-[#00F0FF] group-hover:translate-x-1 transition-transform font-mono font-bold ml-3">
+              <span className="text-lg text-[#E6395F] group-hover:translate-x-1 transition-transform font-mono font-bold ml-3">
                 &rarr;
               </span>
             </Link>

@@ -78,7 +78,7 @@ export default function SoundProvider({ children }) {
   // 1. Hydrate from localStorage after mount (client-only)
   // -------------------------------------------------------------------------
   useEffect(() => {
-    setSoundPref(getStoredPref());
+    setTimeout(() => setSoundPref(getStoredPref()), 0);
   }, []);
 
   // -------------------------------------------------------------------------

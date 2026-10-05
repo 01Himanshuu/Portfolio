@@ -13,7 +13,7 @@ const PROJECTS = [
     description: 'A university roommate matching platform.',
     tech: ['Next.js', 'TypeScript', 'Tailwind', 'PostgreSQL', 'AWS'],
     image: '/projects/roomie_bu_preview_1786448724743.png',
-    accent: '#00F0FF',
+    accent: '#E6395F',
     caseStudy: {
       overview: 'RoomieBU is a centralized platform designed to solve the friction of university housing and roommate discovery.',
       role: 'Full-Stack Engineer',
@@ -89,7 +89,7 @@ export default function SelectedProjects() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
-    
+
     const ctx = gsap.context(() => {
       const rows = gsap.utils.toArray('.project-editorial-row');
       rows.forEach((row) => {
@@ -106,7 +106,7 @@ export default function SelectedProjects() {
         });
       });
     }, containerRef);
-    
+
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         // Need to call handleCloseCaseStudy, but it depends on scope.
@@ -134,9 +134,19 @@ export default function SelectedProjects() {
     };
   }, []);
 
+  useEffect(() => {
+    if (activeProject) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [activeProject]);
+
   const handleOpenCaseStudy = (e, project) => {
-    // Prevent scrolling while overlay is open
-    document.body.style.overflow = 'hidden';
+    // Prevent scrolling while overlay is open (handled by useEffect)
     setActiveProject(project);
 
     const rect = e.currentTarget.getBoundingClientRect();
@@ -163,10 +173,10 @@ export default function SelectedProjects() {
       duration: 0.8,
       ease: 'power4.inOut',
       onComplete: () => {
-         gsap.fromTo('.cs-stagger', 
-           { opacity: 0, y: 30 },
-           { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' }
-         );
+        gsap.fromTo('.cs-stagger',
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' }
+        );
       }
     });
   };
@@ -185,10 +195,10 @@ export default function SelectedProjects() {
 
   return (
     <div ref={containerRef} className="w-full flex flex-col gap-32 md:gap-48 py-20">
-      
+
       {PROJECTS.map((project, idx) => (
         <div key={project.id} className="project-editorial-row group relative w-full flex flex-col xl:flex-row gap-12 xl:gap-24 items-center">
-          
+
           {/* Content Column */}
           <div className="w-full xl:w-5/12 flex flex-col order-2 xl:order-1">
             <div className="flex items-center gap-4 mb-6">
@@ -200,7 +210,7 @@ export default function SelectedProjects() {
                 {project.category}
               </span>
             </div>
-            
+
             <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mb-6 leading-none group-hover:text-white transition-colors duration-500 transform group-hover:translate-x-2">
               {project.name}
             </h3>
@@ -217,11 +227,11 @@ export default function SelectedProjects() {
               ))}
             </div>
 
-            <button 
+            <button
               onClick={(e) => handleOpenCaseStudy(e, project)}
-              className="group/btn self-start flex items-center gap-4 font-mono text-xs uppercase tracking-[0.2em] text-white hover:text-[#00F0FF] transition-colors"
+              className="group/btn self-start flex items-center gap-4 font-mono text-xs uppercase tracking-[0.2em] text-white hover:text-[#E6395F] transition-colors"
             >
-              <span className="border-b border-transparent group-hover/btn:border-[#00F0FF] pb-1 transition-all">
+              <span className="border-b border-transparent group-hover/btn:border-[#E6395F] pb-1 transition-all">
                 View Case Study
               </span>
               <span className="transform group-hover/btn:translate-x-2 transition-transform duration-400 ease-out">
@@ -235,7 +245,7 @@ export default function SelectedProjects() {
             <div onClick={(e) => handleOpenCaseStudy(e, project)} className="cursor-pointer block">
               <MacWindow title={`build@env: ~/${project.id}`} variant="eng" size="full" innerClassName="bg-[#0c0e14]">
                 <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl bg-black border border-white/10">
-                  <img 
+                  <img
                     src={project.image}
                     alt={`${project.name} Preview`}
                     loading="lazy"
@@ -247,112 +257,112 @@ export default function SelectedProjects() {
               </MacWindow>
             </div>
           </div>
-          
+
         </div>
       ))}
 
       {/* Full-Screen Case Study Detail Overlay */}
-      <div 
-        ref={overlayRef} 
+      <div
+        ref={overlayRef}
         className="fixed inset-0 z-[100] pointer-events-none opacity-0 flex flex-col bg-[#06080c] overflow-y-auto"
       >
         {activeProject && (
           <div ref={overlayContentRef} className="w-full min-h-screen pointer-events-auto pb-32">
-            
+
             {/* Overlay Header */}
             <div className="w-full h-20 border-b border-white/10 flex items-center justify-between px-6 md:px-12 sticky top-0 bg-[#06080c]/90 backdrop-blur-xl z-50">
-               <span className="font-mono text-xs uppercase tracking-[0.2em]" style={{ color: activeProject.accent }}>
-                 Case Study // {activeProject.id}
-               </span>
-               <button 
-                 onClick={handleCloseCaseStudy}
-                 className="font-mono text-xs uppercase tracking-[0.2em] hover:text-white text-neutral-400 transition-colors"
-               >
-                 [ CLOSE ]
-               </button>
+              <span className="font-mono text-xs uppercase tracking-[0.2em]" style={{ color: activeProject.accent }}>
+                Case Study // {activeProject.id}
+              </span>
+              <button
+                onClick={handleCloseCaseStudy}
+                className="font-mono text-xs uppercase tracking-[0.2em] hover:text-white text-neutral-400 transition-colors"
+              >
+                [ CLOSE ]
+              </button>
             </div>
 
             <div className="max-w-[1200px] mx-auto pt-24 px-6 md:px-12">
-               
-               {/* Header Hero */}
-               <div className="mb-24 cs-stagger">
-                 <h2 className="text-5xl md:text-8xl lg:text-[7rem] font-black uppercase tracking-tighter text-white mb-8 leading-[0.9]">
-                   {activeProject.name}
-                 </h2>
-                 <p className="text-xl md:text-3xl font-light text-neutral-300 max-w-4xl leading-relaxed">
-                   {activeProject.description}
-                 </p>
-               </div>
 
-               {/* Massive Media Presentation */}
-               <div className="w-full aspect-[16/9] md:aspect-[21/9] rounded-2xl overflow-hidden bg-black mb-32 cs-stagger border border-white/10 shadow-2xl">
-                 <img src={activeProject.image} alt={`${activeProject.name} Detail`} loading="lazy" className="w-full h-full object-cover" />
-               </div>
+              {/* Header Hero */}
+              <div className="mb-24 cs-stagger">
+                <h2 className="text-5xl md:text-8xl lg:text-[7rem] font-black uppercase tracking-tighter text-white mb-8 leading-[0.9]">
+                  {activeProject.name}
+                </h2>
+                <p className="text-xl md:text-3xl font-light text-neutral-300 max-w-4xl leading-relaxed">
+                  {activeProject.description}
+                </p>
+              </div>
 
-               {/* Case Study Grid */}
-               <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 mb-32">
-                 
-                 {/* Left Column (Meta) */}
-                 <div className="md:col-span-4 flex flex-col gap-12">
-                    
-                    <div className="cs-stagger">
-                      <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 border-b border-white/10 pb-2 mb-4">02 — Role</h4>
-                      <p className="text-base text-neutral-300 leading-relaxed font-light">{activeProject.caseStudy.role}</p>
+              {/* Massive Media Presentation */}
+              <div className="w-full aspect-[16/9] md:aspect-[21/9] rounded-2xl overflow-hidden bg-black mb-32 cs-stagger border border-white/10 shadow-2xl">
+                <img src={activeProject.image} alt={`${activeProject.name} Detail`} loading="lazy" className="w-full h-full object-cover" />
+              </div>
+
+              {/* Case Study Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 mb-32">
+
+                {/* Left Column (Meta) */}
+                <div className="md:col-span-4 flex flex-col gap-12">
+
+                  <div className="cs-stagger">
+                    <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 border-b border-white/10 pb-2 mb-4">02 — Role</h4>
+                    <p className="text-base text-neutral-300 leading-relaxed font-light">{activeProject.caseStudy.role}</p>
+                  </div>
+
+                  <div className="cs-stagger">
+                    <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 border-b border-white/10 pb-2 mb-4">03 — Tech Stack</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {activeProject.tech.map(t => (
+                        <span key={t} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-mono text-neutral-300">{t}</span>
+                      ))}
                     </div>
+                  </div>
 
-                    <div className="cs-stagger">
-                      <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 border-b border-white/10 pb-2 mb-4">03 — Tech Stack</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {activeProject.tech.map(t => (
-                          <span key={t} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-mono text-neutral-300">{t}</span>
-                        ))}
-                      </div>
+                  <div className="cs-stagger">
+                    <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 border-b border-white/10 pb-2 mb-4">08 — Links</h4>
+                    <div className="flex flex-col gap-3">
+                      {activeProject.caseStudy.links.github && (
+                        <a href={activeProject.caseStudy.links.github} className="font-mono text-xs uppercase tracking-widest text-[#E6395F] hover:underline">GITHUB REPOSITORY &rarr;</a>
+                      )}
+                      {activeProject.caseStudy.links.demo && (
+                        <a href={activeProject.caseStudy.links.demo} className="font-mono text-xs uppercase tracking-widest text-[#E6395F] hover:underline">LIVE DEPLOYMENT &rarr;</a>
+                      )}
                     </div>
+                  </div>
 
-                    <div className="cs-stagger">
-                      <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 border-b border-white/10 pb-2 mb-4">08 — Links</h4>
-                      <div className="flex flex-col gap-3">
-                        {activeProject.caseStudy.links.github && (
-                          <a href={activeProject.caseStudy.links.github} className="font-mono text-xs uppercase tracking-widest text-[#00F0FF] hover:underline">GITHUB REPOSITORY &rarr;</a>
-                        )}
-                        {activeProject.caseStudy.links.demo && (
-                          <a href={activeProject.caseStudy.links.demo} className="font-mono text-xs uppercase tracking-widest text-[#00F0FF] hover:underline">LIVE DEPLOYMENT &rarr;</a>
-                        )}
-                      </div>
-                    </div>
+                </div>
 
-                 </div>
+                {/* Right Column (Content) */}
+                <div className="md:col-span-8 flex flex-col gap-16">
 
-                 {/* Right Column (Content) */}
-                 <div className="md:col-span-8 flex flex-col gap-16">
-                    
-                    <div className="cs-stagger">
-                      <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 mb-6">01 — Overview</h4>
-                      <p className="text-xl md:text-2xl font-light text-white leading-relaxed">{activeProject.caseStudy.overview}</p>
-                    </div>
+                  <div className="cs-stagger">
+                    <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 mb-6">01 — Overview</h4>
+                    <p className="text-xl md:text-2xl font-light text-white leading-relaxed">{activeProject.caseStudy.overview}</p>
+                  </div>
 
-                    <div className="cs-stagger">
-                      <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 mb-6">04 — Engineering</h4>
-                      <p className="text-lg md:text-xl font-light text-neutral-300 leading-relaxed">{activeProject.caseStudy.engineering}</p>
-                    </div>
+                  <div className="cs-stagger">
+                    <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 mb-6">04 — Engineering</h4>
+                    <p className="text-lg md:text-xl font-light text-neutral-300 leading-relaxed">{activeProject.caseStudy.engineering}</p>
+                  </div>
 
-                    <div className="cs-stagger">
-                      <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 mb-6">05 — Features</h4>
-                      <p className="text-lg md:text-xl font-light text-neutral-300 leading-relaxed">{activeProject.caseStudy.features}</p>
-                    </div>
+                  <div className="cs-stagger">
+                    <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 mb-6">05 — Features</h4>
+                    <p className="text-lg md:text-xl font-light text-neutral-300 leading-relaxed">{activeProject.caseStudy.features}</p>
+                  </div>
 
-                    <div className="cs-stagger">
-                      <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 mb-6">06 — Challenges</h4>
-                      <p className="text-lg md:text-xl font-light text-neutral-300 leading-relaxed">{activeProject.caseStudy.challenges}</p>
-                    </div>
+                  <div className="cs-stagger">
+                    <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 mb-6">06 — Challenges</h4>
+                    <p className="text-lg md:text-xl font-light text-neutral-300 leading-relaxed">{activeProject.caseStudy.challenges}</p>
+                  </div>
 
-                    <div className="cs-stagger">
-                      <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 mb-6">07 — Result</h4>
-                      <p className="text-lg md:text-xl font-light text-white leading-relaxed">{activeProject.caseStudy.result}</p>
-                    </div>
+                  <div className="cs-stagger">
+                    <h4 className="font-mono text-xs tracking-widest uppercase text-neutral-500 mb-6">07 — Result</h4>
+                    <p className="text-lg md:text-xl font-light text-white leading-relaxed">{activeProject.caseStudy.result}</p>
+                  </div>
 
-                 </div>
-               </div>
+                </div>
+              </div>
 
             </div>
           </div>

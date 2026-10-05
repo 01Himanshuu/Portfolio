@@ -38,7 +38,7 @@ void main() {
   gl_FragColor = vec4(color, 1.0); // RENDER_FRAME(4K_HDR);
 }`,
     frameTitle: 'CYBERPUNK NEON NOIR // 4K ANAMORPHIC',
-    frameStyle: 'from-[#00F0FF]/40 via-neutral-900 to-[#C084FC]/40',
+    frameStyle: 'from-[#E6395F]/40 via-neutral-900 to-[#C084FC]/40',
     telemetry: 'RENDERED: 8K VV 17:9 // LUT: TEAL_ORANGE_C4 // FPS: 60',
   },
   {
@@ -53,7 +53,7 @@ export function configureCinemaPipeline(renderer, scene, camera) {
   const bloomPass = new UnrealBloomPass(new THREE.Vector2(3840, 2160), 1.8, 0.4, 0.85);
   
   // Custom horizontal streak kernel for 2x anamorphic simulation
-  bloomPass.tintColor = new THREE.Color('#00F0FF');
+  bloomPass.tintColor = new THREE.Color('#E6395F');
   bloomPass.horizontalStreakIntensity = 2.4;
   composer.addPass(bloomPass);
   return composer; // SYNC_TIMELINE_PLAYHEAD();
@@ -78,7 +78,7 @@ async function executeStoryQuery(prompt: string): Promise<CinematicFrame> {
   return animateCameraSpline(matches[0].metadata.keyframes);
 }`,
     frameTitle: 'AGENTIC VECTOR STREAM // 3D MOTION SPLINE',
-    frameStyle: 'from-emerald-500/30 via-neutral-900 to-[#00F0FF]/35',
+    frameStyle: 'from-emerald-500/30 via-neutral-900 to-[#E6395F]/35',
     telemetry: 'RENDERED: REALTIME WEBGPU // TTFT < 110ms // 14K NODES',
   },
 ];
@@ -134,10 +134,10 @@ export default function CodeToFrameMorph() {
       {/* Module Title Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-3">
-          <span className="font-mono text-xs md:text-sm tracking-widest uppercase text-[#00F0FF]">
+          <span className="font-mono text-xs md:text-sm tracking-widest uppercase text-[#E6395F]">
             {'// SYNTAX_TO_CINEMA // CODE_TO_FRAME_MORPH_ENGINE // WEBGL_SHADER_v4'}
           </span>
-          <span className="h-[1px] w-12 sm:w-24 bg-gradient-to-r from-[#00F0FF]/50 to-transparent" />
+          <span className="h-[1px] w-12 sm:w-24 bg-gradient-to-r from-[#E6395F]/50 to-transparent" />
         </div>
 
         <button
@@ -147,13 +147,13 @@ export default function CodeToFrameMorph() {
           disabled={isAutoMorphing}
           className={`px-4 py-1.5 rounded-full border font-mono text-xs tracking-wider transition-all duration-300 flex items-center gap-2 cursor-pointer ${
             isAutoMorphing
-              ? 'bg-[#00F0FF]/20 border-[#00F0FF] text-[#00F0FF] cursor-wait'
-              : 'bg-neutral-900/60 border-white/20 text-neutral-300 hover:border-[#00F0FF] hover:text-[#00F0FF] hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]'
+              ? 'bg-[#E6395F]/20 border-[#E6395F] text-[#E6395F] cursor-wait'
+              : 'bg-neutral-900/60 border-white/20 text-neutral-300 hover:border-[#E6395F] hover:text-[#E6395F] hover:shadow-[0_0_15px_rgba(230,57,95,0.2)]'
           }`}
         >
           <span
             className={`w-2 h-2 rounded-full ${
-              isAutoMorphing ? 'bg-[#00F0FF] animate-ping' : 'bg-[#C084FC]'
+              isAutoMorphing ? 'bg-[#E6395F] animate-ping' : 'bg-[#C084FC]'
             }`}
           />
           <span>{isAutoMorphing ? 'MORPHING_SYNTAX_TO_FRAME...' : '▶ TRIGGER CODE-TO-FRAME MORPH'}</span>
@@ -175,12 +175,12 @@ export default function CodeToFrameMorph() {
               onMouseEnter={playHover}
               className={`text-left p-4 rounded-xl border transition-all duration-300 relative overflow-hidden group cursor-pointer focus-visible:outline-none ${
                 isSelected
-                  ? 'bg-neutral-900/95 border-[#00F0FF] shadow-[0_0_25px_rgba(0,240,255,0.18)] -translate-y-0.5'
-                  : 'bg-neutral-950/60 border-white/10 hover:border-[#00F0FF]/40 hover:bg-neutral-900/50'
+                  ? 'bg-neutral-900/95 border-[#E6395F] shadow-[0_0_25px_rgba(230,57,95,0.18)] -translate-y-0.5'
+                  : 'bg-neutral-950/60 border-white/10 hover:border-[#E6395F]/40 hover:bg-neutral-900/50'
               }`}
             >
               <div className="flex items-center justify-between font-mono text-xs mb-1.5">
-                <span className="text-[#00F0FF] font-bold">{preset.name}</span>
+                <span className="text-[#E6395F] font-bold">{preset.name}</span>
                 <span className="text-[10px] uppercase text-neutral-400">PRESET</span>
               </div>
               <p className="text-xs text-neutral-300 line-clamp-2 leading-relaxed">
@@ -194,7 +194,7 @@ export default function CodeToFrameMorph() {
       {/* Interactive Morph Control Slider Bar */}
       <div className="p-4 sm:p-6 rounded-xl border border-white/10 bg-neutral-950/80 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
         <div className="flex items-center gap-3">
-          <span className="text-[#00F0FF] font-bold">0% SYNTAX CODE</span>
+          <span className="text-[#E6395F] font-bold">0% SYNTAX CODE</span>
           <span className="text-neutral-500">◄--- MORPH PROGRESS: {morphProgress}% ---►</span>
           <span className="text-[#C084FC] font-bold">100% CINEMA FRAME</span>
         </div>
@@ -208,7 +208,7 @@ export default function CodeToFrameMorph() {
             }}
             className={`px-3 py-1 rounded border transition-colors cursor-pointer ${
               morphProgress === 0
-                ? 'bg-[#00F0FF]/20 border-[#00F0FF] text-[#00F0FF]'
+                ? 'bg-[#E6395F]/20 border-[#E6395F] text-[#E6395F]'
                 : 'bg-neutral-900 border-white/10 text-neutral-400 hover:text-white'
             }`}
           >
@@ -246,7 +246,7 @@ export default function CodeToFrameMorph() {
       </div>
 
       {/* Dual/Hybrid Viewport Morph Canvas */}
-      <div className="code-frame-engine w-full rounded-2xl border border-white/20 bg-neutral-950 overflow-hidden relative shadow-[0_0_50px_rgba(0,240,255,0.12)] min-h-[440px] flex flex-col justify-between">
+      <div className="code-frame-engine w-full rounded-2xl border border-white/20 bg-neutral-950 overflow-hidden relative shadow-[0_0_50px_rgba(230,57,95,0.12)] min-h-[440px] flex flex-col justify-between">
         {/* Top Window Slate Header */}
         <div className="flex items-center justify-between px-6 py-3.5 border-b border-white/10 bg-neutral-900/70 font-mono text-xs">
           <div className="flex items-center gap-2.5">
@@ -261,9 +261,9 @@ export default function CodeToFrameMorph() {
             <span
               className="px-2 py-0.5 rounded text-[10px] font-bold"
               style={{
-                backgroundColor: morphProgress < 50 ? 'rgba(0,240,255,0.15)' : 'rgba(192,132,252,0.2)',
-                color: morphProgress < 50 ? '#00F0FF' : '#C084FC',
-                borderColor: morphProgress < 50 ? '#00F0FF' : '#C084FC',
+                backgroundColor: morphProgress < 50 ? 'rgba(230,57,95,0.15)' : 'rgba(192,132,252,0.2)',
+                color: morphProgress < 50 ? '#E6395F' : '#C084FC',
+                borderColor: morphProgress < 50 ? '#E6395F' : '#C084FC',
               }}
             >
               {morphProgress < 30

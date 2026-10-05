@@ -90,10 +90,20 @@ export default function SelectedWork() {
     };
   }, []);
 
+  useEffect(() => {
+    if (activeWork) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [activeWork]);
+
   const openViewer = (work) => {
-    document.body.style.overflow = 'hidden';
     setActiveWork(work);
-    
+
     gsap.set(overlayRef.current, {
       opacity: 0,
       y: '100%',
@@ -109,7 +119,6 @@ export default function SelectedWork() {
   };
 
   const closeViewer = () => {
-    document.body.style.overflow = '';
     gsap.to(overlayRef.current, {
       opacity: 0,
       y: '10%',
@@ -124,7 +133,7 @@ export default function SelectedWork() {
 
   return (
     <div ref={containerRef} className="w-full relative z-10 py-20 px-6 sm:px-12 md:px-20 max-w-[1400px] mx-auto">
-      
+
       <div className="font-mono text-sm tracking-[0.3em] uppercase text-[#C084FC] mb-20 border-b border-white/10 pb-4">
         SELECTED WORK // CINEMATIC
       </div>
@@ -132,7 +141,7 @@ export default function SelectedWork() {
       <div className="flex flex-col gap-32 md:gap-48">
         {CREATIVE_WORK.map((work) => (
           <div key={work.id} className="work-item group cursor-pointer" onClick={() => openViewer(work)}>
-            
+
             {/* Metadata Header */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
               <div>
@@ -145,7 +154,7 @@ export default function SelectedWork() {
                   <span>{work.year}</span>
                 </div>
               </div>
-              
+
               <div className="flex flex-col md:items-end gap-2 text-left md:text-right">
                 <span className="font-mono text-xs tracking-widest text-[#C084FC] uppercase">
                   {work.role}
@@ -158,13 +167,13 @@ export default function SelectedWork() {
 
             {/* Massive Visual Presentation */}
             <div className="w-full aspect-[16/9] md:aspect-[21/9] bg-black overflow-hidden relative">
-              <img 
-                src={work.image} 
+              <img
+                src={work.image}
                 alt={work.title}
                 loading="lazy"
                 className="w-full h-full object-cover transform scale-100 transition-all duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 opacity-90 group-hover:opacity-100 filter group-hover:brightness-110"
               />
-              
+
               {/* Play / View Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8 md:p-12">
                 <div className="font-mono text-xs tracking-[0.2em] uppercase text-white flex items-center gap-4 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
@@ -179,19 +188,19 @@ export default function SelectedWork() {
       </div>
 
       {/* Immersive Project Viewer */}
-      <div 
-        ref={overlayRef} 
+      <div
+        ref={overlayRef}
         className="fixed inset-0 z-[100] bg-[#030406] hidden flex-col overflow-y-auto"
       >
         {activeWork && (
           <div className="min-h-screen w-full relative pb-32">
-            
+
             {/* Viewer Header */}
             <div className="absolute top-0 w-full p-6 md:p-12 flex justify-between items-center z-50 mix-blend-difference">
               <span className="font-mono text-xs tracking-[0.2em] text-white uppercase">
-                {activeWork.title} // {activeWork.year}
+                {activeWork.title} {'//'} {activeWork.year}
               </span>
-              <button 
+              <button
                 onClick={(e) => { e.stopPropagation(); closeViewer(); }}
                 className="font-mono text-xs tracking-[0.2em] text-white uppercase hover:text-[#C084FC] transition-colors"
               >
@@ -201,9 +210,9 @@ export default function SelectedWork() {
 
             {/* Edge-to-Edge Media */}
             <div className="w-full h-[70vh] md:h-screen bg-black">
-              <img 
-                src={activeWork.image} 
-                alt={`${activeWork.title} Detail`} 
+              <img
+                src={activeWork.image}
+                alt={`${activeWork.title} Detail`}
                 loading="lazy"
                 className="w-full h-full object-cover opacity-90"
               />
@@ -212,7 +221,7 @@ export default function SelectedWork() {
             {/* Viewer Content */}
             <div className="max-w-[1200px] mx-auto px-6 sm:px-12 md:px-20 -mt-20 md:-mt-32 relative z-10">
               <div className="bg-[#0a0c10]/95 backdrop-blur-2xl border border-white/5 p-8 md:p-16 flex flex-col md:flex-row gap-16 md:gap-24 shadow-2xl">
-                
+
                 <div className="w-full md:w-1/3 flex flex-col gap-8">
                   <div>
                     <h4 className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase mb-2">Category</h4>

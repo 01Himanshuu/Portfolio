@@ -1152,7 +1152,7 @@ ol {
 
 /* High-contrast focus visible ring for keyboard navigation */
 :focus-visible {
-  outline: 2px solid #00F0FF !important;
+  outline: 2px solid #E6395F !important;
   outline-offset: 4px !important;
   transition: outline-offset 0.15s ease;
 }
@@ -1352,10 +1352,10 @@ video {
   --ds-fg-faint: #333333;
 
   /* Identity accents — engineering */
-  --ds-accent-eng: #00F0FF;
-  --ds-accent-eng-muted: rgba(0, 240, 255, 0.15);
-  --ds-accent-eng-glow: rgba(0, 240, 255, 0.08);
-  --ds-accent-eng-border: rgba(0, 240, 255, 0.20);
+  --ds-accent-eng: #E6395F;
+  --ds-accent-eng-muted: rgba(230, 57, 95, 0.15);
+  --ds-accent-eng-glow: rgba(230, 57, 95, 0.08);
+  --ds-accent-eng-border: rgba(230, 57, 95, 0.20);
 
   /* Identity accents — creative */
   --ds-accent-cre: #C084FC;
@@ -1720,5 +1720,58 @@ video {
 
   .ds-scroll-hint {
     animation: none;
+  }
+}
+
+/* ============================================================
+   VISITOR COUNTER
+   Step 3 — persistent visitor count display
+   ============================================================ */
+
+.visitor-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  /* no extra padding — the parent footer row handles vertical spacing */
+}
+
+.visitor-counter__label {
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.625rem;        /* 10px */
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #444450;             /* very muted — intentionally subtle */
+  line-height: 1;
+}
+
+.visitor-counter__number {
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', 'Courier New', monospace;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: #5a5a6e;             /* muted purple-grey — echoes accent-primary */
+  line-height: 1;
+  font-variant-numeric: tabular-nums; /* keeps digit widths stable during animation */
+  min-width: 6ch;             /* prevent layout shift as count animates */
+  text-align: center;
+  transition: color 0.4s ease;
+}
+
+/* Subtle glow when hovered */
+.visitor-counter:hover .visitor-counter__number {
+  color: #8a8aaa;
+}
+
+@media (max-width: 640px) {
+  .visitor-counter__label {
+    font-size: 0.5625rem;     /* 9px on mobile */
+    letter-spacing: 0.25em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visitor-counter__number {
+    transition: none;
   }
 }

@@ -56,7 +56,7 @@ export default function Header() {
     
     if (typeof window !== 'undefined') {
       if (window.__lenis && targetId) {
-        window.__lenis.scrollTo(targetId, { offset: 0, duration: 1.5 });
+        window.__lenis.scrollTo(targetId, { offset: -80, duration: 1.5 });
       }
     }
   }, [playClick, closeMenu]);
@@ -65,7 +65,7 @@ export default function Header() {
     <header className="header z-[100] relative">
       {/* Logo */}
       <button
-        className="header-logo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00F0FF]/80 rounded px-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        className="header-logo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6395F]/80 rounded px-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
         onClick={() => handleNavClick('#hello')}
         onMouseEnter={playHover}
       >
@@ -76,7 +76,7 @@ export default function Header() {
       <nav className={`header-nav ${menuOpen ? 'open' : ''}`} id="header-nav">
         
         <button
-          className={`header-nav-link ${activeSection === 'build' ? 'active text-[#00F0FF]' : ''} active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00F0FF]/80 rounded px-2 transition-all duration-300`}
+          className={`header-nav-link ${activeSection === 'build' ? 'active text-[#E6395F]' : ''} active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6395F]/80 rounded px-2 transition-all duration-300`}
           onClick={() => handleNavClick('#build')}
           onMouseEnter={playHover}
         >
@@ -112,7 +112,7 @@ export default function Header() {
 
         {/* Theme Toggle */}
         <button
-          className="header-toggle active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00F0FF]/80 rounded px-2 transition-all duration-300 cursor-pointer ml-4"
+          className="header-toggle active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6395F]/80 rounded px-2 transition-all duration-300 cursor-pointer ml-4"
           onClick={() => {
             playClick();
             cycleTheme();
@@ -125,7 +125,7 @@ export default function Header() {
 
         {/* Sound Toggle */}
         <button
-          className={`header-toggle ${soundOn ? 'sound-active-pulse text-white' : 'text-neutral-500'} active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00F0FF]/80 rounded px-2 transition-all duration-300 cursor-pointer`}
+          className={`header-toggle ${soundOn ? 'sound-active-pulse text-white' : 'text-neutral-500'} active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6395F]/80 rounded px-2 transition-all duration-300 cursor-pointer`}
           onClick={toggleSound}
           onMouseEnter={playHover}
           aria-label={soundOn ? 'Turn sound off' : 'Turn sound on'}

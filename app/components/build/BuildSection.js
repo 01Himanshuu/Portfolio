@@ -36,7 +36,7 @@ export default function BuildSection() {
     <section
       id="build"
       ref={sectionRef}
-      className="relative w-full bg-[#06080c] text-white pt-40 md:pt-64 overflow-hidden"
+      className="relative w-full bg-[#06080c] text-white py-32 md:py-64 overflow-hidden"
       aria-label="Software Engineering Section"
     >
       {/* Subtle Grid / Noise Background */}
@@ -44,7 +44,7 @@ export default function BuildSection() {
         className="absolute inset-0 pointer-events-none opacity-[0.15]"
         style={{
           backgroundImage:
-            'linear-gradient(to right, rgba(0,240,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,240,255,0.1) 1px, transparent 1px)',
+            'linear-gradient(to right, rgba(230,57,95,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(230,57,95,0.1) 1px, transparent 1px)',
           backgroundSize: '4vw 4vw',
           maskImage: 'linear-gradient(to bottom, black 20%, transparent 80%)',
           WebkitMaskImage: 'linear-gradient(to bottom, black 20%, transparent 80%)',
@@ -55,13 +55,13 @@ export default function BuildSection() {
       {/* Intro Container (Massive Whitespace) */}
       <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-12 md:px-20 relative z-10 build-intro-container mb-40 md:mb-64">
         <div className="max-w-5xl">
-          <div className="build-intro-text font-mono text-sm tracking-[0.3em] uppercase text-[#00F0FF] mb-8">
+          <div className="build-intro-text font-mono text-sm tracking-[0.3em] uppercase text-[#E6395F] mb-8">
             01 // Engineering Case Studies
           </div>
 
           <h2 className="build-intro-text text-5xl md:text-7xl lg:text-[7rem] font-black tracking-tighter uppercase leading-[0.9] mb-12 text-white">
             ENGINEERING <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-white/60">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E6395F] to-white/60">
               / SELECTED WORK
             </span>
           </h2>

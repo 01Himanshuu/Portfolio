@@ -8,7 +8,7 @@ export default function NotFound() {
     <div className="min-h-screen w-full bg-[#06080c] flex flex-col items-center justify-center text-white p-6 relative overflow-hidden">
       
       {/* Abstract Background Elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-[#00F0FF]/10 to-[#C084FC]/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-[#E6395F]/10 to-[#C084FC]/10 rounded-full blur-[150px] pointer-events-none" />
       
       <div className="relative z-10 flex flex-col items-center text-center">
         <h1 className="text-8xl md:text-[12rem] font-black uppercase tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20">
