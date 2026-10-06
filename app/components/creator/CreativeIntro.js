@@ -43,12 +43,10 @@ export default function CreativeIntro() {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full max-w-[1400px] mx-auto px-6 sm:px-12 md:px-20 mt-32 md:mt-48 perspective-1000">
-
-      <div className="ci-text font-mono text-sm md:text-base tracking-[0.3em] uppercase text-[#C084FC] mb-12 flex items-center gap-6">
-        <span className="w-12 h-px bg-[#C084FC]/50" />
-        03 // Creative Studio
-      </div>
+    <div ref={containerRef} className="w-full max-w-[1400px] mx-auto !px-8 sm:!px-16 md:!px-24 lg:!px-28 mt-32 md:mt-48 perspective-1000">      <div className="ci-text font-mono text-sm md:text-base tracking-[0.3em] uppercase text-[#C084FC] mb-12 flex items-center gap-6">
+      <span className="w-12 h-px bg-[#C084FC]/50" />
+      03 // Creative Studio
+    </div>
 
       <h2 className="ci-text text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] font-black tracking-tighter uppercase leading-[0.9] text-white">
         EDIT.<br />

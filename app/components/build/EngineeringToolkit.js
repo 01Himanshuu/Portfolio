@@ -44,7 +44,7 @@ export default function EngineeringToolkit() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
-    
+
     const ctx = gsap.context(() => {
       gsap.from('.cluster-panel', {
         y: 40,
@@ -59,21 +59,20 @@ export default function EngineeringToolkit() {
         }
       });
     }, containerRef);
-    
+
     return () => ctx.revert();
   }, []);
 
   return (
     <div ref={containerRef} className="w-full relative z-10 py-32 mb-32 max-w-[1400px] mx-auto">
-      
+
       {/* Editorial Header */}
-      <div className="mb-20 px-6 sm:px-12 md:px-20">
-        <div className="font-mono text-xs tracking-[0.3em] uppercase text-[#E6395F] mb-6 flex items-center gap-4">
-          <span className="w-2 h-2 rounded-full bg-[#E6395F] animate-pulse" />
-          SYSTEM / TOOLKIT
-        </div>
+      <div className="mb-20 post-intro-gutter">        <div className="font-mono text-xs tracking-[0.3em] uppercase text-[#E6395F] mb-6 flex items-center gap-4">
+        <span className="w-2 h-2 rounded-full bg-[#E6395F] animate-pulse" />
+        SYSTEM / TOOLKIT
+      </div>
         <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-white">
-          Engineering<br/>Control Surface
+          Engineering<br />Control Surface
         </h2>
       </div>
 
@@ -84,14 +83,14 @@ export default function EngineeringToolkit() {
           const isFaded = hoveredCluster !== null && !isHovered;
 
           return (
-            <div 
+            <div
               key={cluster.id}
               className={`cluster-panel relative p-8 md:p-12 lg:p-16 bg-[#06080c] flex flex-col justify-between transition-all duration-500 overflow-hidden ${isFaded ? 'opacity-30 blur-[2px]' : 'opacity-100'} hover:bg-white/[0.02]`}
               onMouseEnter={() => setHoveredCluster(idx)}
               onMouseLeave={() => setHoveredCluster(null)}
             >
               {/* Background Glow */}
-              <div 
+              <div
                 className={`absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(230,57,95,0.05)_0%,transparent_70%)] transition-opacity duration-700 pointer-events-none ${isHovered ? 'opacity-100' : 'opacity-0'}`}
               />
 
@@ -118,8 +117,8 @@ export default function EngineeringToolkit() {
               {/* Technologies */}
               <div className="relative z-10 flex flex-wrap gap-3">
                 {cluster.tech.map((tech) => (
-                  <span 
-                    key={tech} 
+                  <span
+                    key={tech}
                     className={`font-mono text-xs md:text-sm tracking-wider uppercase px-4 py-2 border transition-all duration-300 ${isHovered ? 'border-[#E6395F]/30 text-[#E6395F] bg-[#E6395F]/5' : 'border-white/10 text-neutral-400 bg-transparent'}`}
                   >
                     {tech}

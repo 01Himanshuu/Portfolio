@@ -54,49 +54,11 @@ export default function CurvedRevealOverlay() {
         backgroundColor: '#0a0a0a',
       });
 
-      // 3. Create ONE ScrollTrigger timeline
-      // pinSpacing: false ensures ZERO blank spacer and ZERO extra scroll distance.
-      // Introduction sits immediately after Hero in standard DOM flow.
-      masterTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: heroSection,
-          start: 'top top',
-          end: '+=100%',
-          pin: true,
-          pinSpacing: false,
-          scrub: true,
-          anticipatePin: 1,
-        },
-      });
-
-      // A. Hero fades and scales slightly behind the rising curved edge (0% to 80% of scroll)
-      masterTl.to(
-        heroSection,
-        {
-          scale: 0.95,
-          opacity: 0.3,
-          filter: 'blur(6px)',
-          ease: 'power2.out',
-          duration: 0.8,
-        },
-        0
-      );
-
-      // B. Top edge organic curve gradually flattens to 0px as Intro reaches center (30% to 90% of scroll)
-      masterTl.to(
-        introSection,
-        {
-          borderTopLeftRadius: '0px',
-          borderTopRightRadius: '0px',
-          borderTopColor: 'rgba(200, 255, 44, 0)',
-          boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
-          ease: 'power2.inOut',
-          duration: 0.6,
-        },
-        0.3
-      );
-
-      ScrollTrigger.refresh();
+      // Removed the duplicate ScrollTrigger timeline here.
+      // HeroSection.js ALREADY creates a ScrollTrigger that pins #hero and scrubs its exit animation.
+      // Having TWO ScrollTriggers pinning the exact same element simultaneously with pinSpacing: false
+      // causes catastrophic layout thrashing and GSAP spacer conflicts.
+      // The static curve styles above are all that is needed here.
     };
 
     const timer = setTimeout(initCurvedTransition, 150);

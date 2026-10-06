@@ -134,8 +134,6 @@ export default function DynamicBackgroundEngine() {
           .to(combined, { opacity: 0, scale: 0.9, duration: 1 }, 0);
         timelines.push(tlContact);
       }
-
-      ScrollTrigger.refresh();
     };
 
     const timer = setTimeout(initBackgroundEngine, 200);
@@ -155,7 +153,7 @@ export default function DynamicBackgroundEngine() {
       {/* 1. Cherry-Red Atmosphere Layer — Crimson & Deep Red (#E6395F, #A3163A) */}
       <div
         ref={cyanLayerRef}
-        className="absolute -top-32 -left-32 w-[750px] h-[750px] rounded-full opacity-0 pointer-events-none transition-opacity"
+        className="absolute -top-32 -left-32 w-[750px] h-[750px] rounded-full opacity-0 pointer-events-none"
         style={{
           background:
             'radial-gradient(circle, rgba(230, 57, 95, 0.22) 0%, rgba(163, 22, 58, 0.12) 45%, transparent 70%)',
@@ -166,7 +164,7 @@ export default function DynamicBackgroundEngine() {
       {/* 2. Purple Atmosphere Layer — Magenta & Violet (#C084FC, #A855F7) */}
       <div
         ref={purpleLayerRef}
-        className="absolute -bottom-32 -right-32 w-[750px] h-[750px] rounded-full opacity-0 pointer-events-none transition-opacity"
+        className="absolute -bottom-32 -right-32 w-[750px] h-[750px] rounded-full opacity-0 pointer-events-none"
         style={{
           background:
             'radial-gradient(circle, rgba(192, 132, 252, 0.25) 0%, rgba(168, 85, 247, 0.14) 45%, transparent 70%)',
@@ -177,7 +175,7 @@ export default function DynamicBackgroundEngine() {
       {/* 3. Combined Atmosphere Layer — Iridescent Cherry-Red + Purple Synthesis */}
       <div
         ref={combinedLayerRef}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] rounded-full opacity-0 pointer-events-none transition-opacity"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] rounded-full opacity-0 pointer-events-none"
         style={{
           background:
             'radial-gradient(circle, rgba(168, 85, 247, 0.26) 0%, rgba(230, 57, 95, 0.18) 40%, rgba(232, 121, 249, 0.12) 65%, transparent 80%)',

@@ -53,8 +53,7 @@ export default function PhotographyGallery() {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full relative z-10 py-32 flex flex-col gap-40 max-w-[1400px] mx-auto px-6 sm:px-12 md:px-20">
-      
+    <div ref={containerRef} className="w-full relative z-10 py-32 flex flex-col gap-40 max-w-[1400px] mx-auto post-intro-gutter">
       <div className="flex flex-col items-center justify-center text-center mb-12">
         <div className="font-mono text-sm tracking-[0.3em] uppercase text-[#C084FC] mb-6">
           05 // Photography
@@ -69,32 +68,32 @@ export default function PhotographyGallery() {
 
         return (
           <div key={photo.id} className="photo-frame flex flex-col w-full group cursor-default">
-            
+
             {/* The Image (Asymmetrical Widths based on idx) */}
             <div className={`w-full ${idx % 2 === 0 ? 'md:w-10/12 self-start' : 'md:w-8/12 self-end'} aspect-[4/3] md:aspect-[16/10] bg-black overflow-hidden relative mb-8 rounded-sm`}>
-               <img 
-                 src={photo.image}
-                 alt={photo.location}
-                 loading="lazy"
-                 className="w-full h-full object-cover transform scale-[1.01] transition-transform duration-[2s] ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
-               />
-               <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-1000" />
+              <img
+                src={photo.image}
+                alt={photo.location}
+                loading="lazy"
+                className="w-full h-full object-cover transform scale-[1.01] transition-transform duration-[2s] ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
+              />
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-1000" />
             </div>
 
             {/* Minimal Metadata */}
             <div className={`flex flex-col md:flex-row gap-6 md:gap-16 ${idx % 2 === 0 ? 'self-start' : 'self-end md:w-8/12 justify-between'}`}>
-               <div>
-                 <h4 className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase mb-1">Location</h4>
-                 <p className="font-mono text-xs tracking-wider text-white uppercase">{photo.location}</p>
-               </div>
-               <div>
-                 <h4 className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase mb-1">Gear</h4>
-                 <p className="font-mono text-xs tracking-wider text-white uppercase">{photo.camera} / {photo.lens}</p>
-               </div>
-               <div>
-                 <h4 className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase mb-1">Style</h4>
-                 <p className="font-mono text-xs tracking-wider text-[#C084FC] uppercase">{photo.type}</p>
-               </div>
+              <div>
+                <h4 className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase mb-1">Location</h4>
+                <p className="font-mono text-xs tracking-wider text-white uppercase">{photo.location}</p>
+              </div>
+              <div>
+                <h4 className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase mb-1">Gear</h4>
+                <p className="font-mono text-xs tracking-wider text-white uppercase">{photo.camera} / {photo.lens}</p>
+              </div>
+              <div>
+                <h4 className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase mb-1">Style</h4>
+                <p className="font-mono text-xs tracking-wider text-[#C084FC] uppercase">{photo.type}</p>
+              </div>
             </div>
 
           </div>

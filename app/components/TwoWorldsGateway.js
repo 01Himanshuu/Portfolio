@@ -52,16 +52,7 @@ export default function TwoWorldsGateway() {
     }
   };
 
-  // Refresh ScrollTrigger after loader finishes to fix layout measurements
-  useEffect(() => {
-    const handleLoaderComplete = () => {
-      setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 100); // small buffer to ensure DOM layout settles
-    };
-    window.addEventListener('loaderComplete', handleLoaderComplete);
-    return () => window.removeEventListener('loaderComplete', handleLoaderComplete);
-  }, []);
+  // Refresh handled centrally by ScrollEngine
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -169,8 +160,7 @@ export default function TwoWorldsGateway() {
         />
       </div>
 
-      <div ref={containerRef} className="w-full min-h-screen flex flex-col items-center justify-center relative z-10 px-6 sm:px-12 py-24 md:py-0 md:h-screen">
-
+      <div ref={containerRef} className="w-full min-h-screen flex flex-col items-center justify-center relative z-10 post-intro-gutter py-24 md:py-0 md:h-screen">
         {/* Title */}
         <div ref={titleWrapperRef} className="md:absolute md:top-[15%] flex items-center justify-center pointer-events-none mb-16 md:mb-0 w-full">
           <h2 ref={titleRef} className="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-black tracking-tighter leading-[0.95] md:leading-[0.85] uppercase text-center w-full">
@@ -189,8 +179,7 @@ export default function TwoWorldsGateway() {
         </div>
 
         {/* The Two Doors */}
-        <div ref={doorsWrapperRef} className="w-full max-w-[1400px] flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end gap-16 md:gap-0 relative md:absolute md:bottom-[15%] px-0 lg:px-12">
-
+        <div ref={doorsWrapperRef} className="w-full max-w-[1400px] flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end gap-16 md:gap-0 relative md:absolute md:bottom-[15%] post-intro-gutter">
           {/* Engineering Door */}
           <a
             ref={engDoorRef}

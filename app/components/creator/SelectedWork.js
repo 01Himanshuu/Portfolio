@@ -132,8 +132,7 @@ export default function SelectedWork() {
   };
 
   return (
-    <div ref={containerRef} className="w-full relative z-10 py-20 px-6 sm:px-12 md:px-20 max-w-[1400px] mx-auto">
-
+    <div ref={containerRef} className="w-full relative z-10 py-20 post-intro-gutter max-w-[1400px] mx-auto">
       <div className="font-mono text-sm tracking-[0.3em] uppercase text-[#C084FC] mb-20 border-b border-white/10 pb-4">
         SELECTED WORK // CINEMATIC
       </div>

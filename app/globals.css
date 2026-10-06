@@ -562,14 +562,12 @@ ol {
 }
 
 @keyframes pulseNeonTube {
-
   0%,
   100% {
-    filter: drop-shadow(0 0 35px rgba(116, 95, 255, 0.65)) brightness(1);
+    opacity: 0.85;
   }
-
   50% {
-    filter: drop-shadow(0 0 60px rgba(168, 85, 247, 0.95)) brightness(1.15);
+    opacity: 1;
   }
 }
 
@@ -1738,10 +1736,12 @@ video {
 
 .visitor-counter__label {
   font-family: var(--font-jetbrains-mono), 'JetBrains Mono', 'Courier New', monospace;
-  font-size: 0.625rem;        /* 10px */
+  font-size: 0.625rem;
+  /* 10px */
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: #444450;             /* very muted — intentionally subtle */
+  color: #444450;
+  /* very muted — intentionally subtle */
   line-height: 1;
 }
 
@@ -1750,10 +1750,13 @@ video {
   font-size: clamp(1.75rem, 4vw, 2.75rem);
   font-weight: 400;
   letter-spacing: 0.18em;
-  color: #5a5a6e;             /* muted purple-grey — echoes accent-primary */
+  color: #5a5a6e;
+  /* muted purple-grey — echoes accent-primary */
   line-height: 1;
-  font-variant-numeric: tabular-nums; /* keeps digit widths stable during animation */
-  min-width: 6ch;             /* prevent layout shift as count animates */
+  font-variant-numeric: tabular-nums;
+  /* keeps digit widths stable during animation */
+  min-width: 6ch;
+  /* prevent layout shift as count animates */
   text-align: center;
   transition: color 0.4s ease;
 }
@@ -1765,7 +1768,8 @@ video {
 
 @media (max-width: 640px) {
   .visitor-counter__label {
-    font-size: 0.5625rem;     /* 9px on mobile */
+    font-size: 0.5625rem;
+    /* 9px on mobile */
     letter-spacing: 0.25em;
   }
 }
@@ -1774,4 +1778,10 @@ video {
   .visitor-counter__number {
     transition: none;
   }
+}
+
+/* Post-introduction content gutter */
+.post-intro-gutter {
+  padding-left: clamp(24px, 5vw, 90px);
+  padding-right: clamp(24px, 5vw, 90px);
 }

@@ -19,6 +19,8 @@ export default function CinematicSectionTransitions() {
     if (typeof window === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
 
+    let triggers = [];
+
     const initCinematicTransitions = () => {
       // Find sections after Introduction (Hero and Introduction remain untouched)
       const twoWorlds = document.querySelector('#two-worlds-gateway');
@@ -53,15 +55,15 @@ export default function CinematicSectionTransitions() {
 
         animatedSections.forEach((sec) => {
           // Cinematic Clip-Path Reveal
-          gsap.fromTo(
+          const anim = gsap.fromTo(
             sec,
             {
-              clipPath: 'inset(15% 5% 0% 5% round 24px)',
-              filter: 'brightness(0.5)',
+              clipPath: 'inset(15% 5% 0% 5%)',
+
             },
             {
-              clipPath: 'inset(0% 0% 0% 0% round 0px)',
-              filter: 'brightness(1)',
+              clipPath: 'inset(0% 0% 0% 0%)',
+
               ease: 'power2.inOut',
               scrollTrigger: {
                 trigger: sec,
@@ -71,43 +73,18 @@ export default function CinematicSectionTransitions() {
               },
             }
           );
+          if (anim.scrollTrigger) triggers.push(anim.scrollTrigger);
         });
 
-        // The previous section dimming effect (Curtain Pull)
-        // When Build reaches top 30%, fade out Two Worlds? No, Two Worlds is pinned 150vh, so it naturally scrubs away.
-        // For Build -> Create, when Create enters, Build dims.
-        // True Parallax Curtain Pull (Outgoing section is pushed down and back)
-        if (build && create) {
-          gsap.to(build, {
-            y: 200, // Pushes it down to simulate being slower than the scroll
-            scale: 0.9,
-            filter: 'brightness(0.3)',
-            scrollTrigger: {
-              trigger: create,
-              start: 'top bottom', // When Create enters the bottom of viewport
-              end: 'top top',      // When Create reaches the top
-              scrub: true,
-            },
-          });
-        }
-
-        if (create && merge) {
-          gsap.to(create, {
-            y: 200,
-            scale: 0.9,
-            filter: 'brightness(0.3)',
-            scrollTrigger: {
-              trigger: merge,
-              start: 'top bottom',
-              end: 'top top',
-              scrub: true,
-            },
-          });
-        }
+        // PERF FIX: Removed the y:200 + scale:0.9 "Curtain Pull" scrub animations
+        // on build and create sections. These were applying scrubbed transform (y, scale)
+        // to the SAME elements that also have scrubbed clip-path animations above.
+        // Two competing scrubbed transforms on the same element cause layout thrashing
+        // because GSAP must reconcile conflicting transform matrices every frame.
 
         // Fade Intro into Two Worlds
         if (intro && twoWorlds) {
-          gsap.to(intro, {
+          const introAnim = gsap.to(intro, {
             opacity: 0.2,
             scale: 0.95,
             scrollTrigger: {
@@ -117,11 +94,12 @@ export default function CinematicSectionTransitions() {
               scrub: true,
             },
           });
+          if (introAnim.scrollTrigger) triggers.push(introAnim.scrollTrigger);
         }
 
         // Contact Horizon Reveal
         if (contact) {
-          gsap.fromTo(contact,
+          const contactAnim = gsap.fromTo(contact,
             { y: 50, scale: 0.95, opacity: 0 },
             {
               y: 0, scale: 1, opacity: 1, ease: 'power1.out',
@@ -133,16 +111,20 @@ export default function CinematicSectionTransitions() {
               }
             }
           );
+          if (contactAnim.scrollTrigger) triggers.push(contactAnim.scrollTrigger);
         }
       });
 
-      ScrollTrigger.refresh();
+      // PERF FIX: Removed redundant ScrollTrigger.refresh() —
+      // ScrollEngine already calls this with a 250ms delay
     };
 
     const timer = setTimeout(initCinematicTransitions, 180);
 
     return () => {
       clearTimeout(timer);
+      // Properly kill all ScrollTriggers created by this component
+      triggers.forEach(st => st.kill());
     };
   }, []);
 
