@@ -113,84 +113,55 @@ export default function CursorGlow() {
       }
     };
 
-    let rafId = null;
-    let isIdle = false;
-
+    let rafId;
     const animate = () => {
-      let needsUpdate = false;
-
       // 60fps spring interpolation for ring & dot
-      const dxRing = mouseRef.current.x - ringPosRef.current.x;
-      const dyRing = mouseRef.current.y - ringPosRef.current.y;
-      const dxDot = mouseRef.current.x - dotPosRef.current.x;
-      const dyDot = mouseRef.current.y - dotPosRef.current.y;
+      ringPosRef.current.x += (mouseRef.current.x - ringPosRef.current.x) * 0.18;
+      ringPosRef.current.y += (mouseRef.current.y - ringPosRef.current.y) * 0.18;
 
-      if (Math.abs(dxRing) > 0.1 || Math.abs(dyRing) > 0.1 || Math.abs(dxDot) > 0.1 || Math.abs(dyDot) > 0.1) {
-        needsUpdate = true;
-        ringPosRef.current.x += dxRing * 0.18;
-        ringPosRef.current.y += dyRing * 0.18;
-        dotPosRef.current.x += dxDot * 0.45;
-        dotPosRef.current.y += dyDot * 0.45;
+      dotPosRef.current.x += (mouseRef.current.x - dotPosRef.current.x) * 0.45;
+      dotPosRef.current.y += (mouseRef.current.y - dotPosRef.current.y) * 0.45;
 
-        if (ringRef.current) {
-          ringRef.current.style.transform = `translate3d(${ringPosRef.current.x}px, ${ringPosRef.current.y}px, 0)`;
-        }
-        if (dotRef.current) {
-          dotRef.current.style.transform = `translate3d(${dotPosRef.current.x}px, ${dotPosRef.current.y}px, 0)`;
-        }
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${ringPosRef.current.x}px, ${ringPosRef.current.y}px, 0)`;
+      }
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${dotPosRef.current.x}px, ${dotPosRef.current.y}px, 0)`;
       }
 
       // Render pixel particles
       if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         const particles = particlesRef.current;
-        if (particles.length > 0) {
-          needsUpdate = true;
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          for (let i = particles.length - 1; i >= 0; i--) {
-            const p = particles[i];
-            p.x += p.vx;
-            p.y += p.vy;
-            p.vx *= 0.95;
-            p.vy *= 0.95;
-            p.alpha -= p.decay;
-            if (p.alpha <= 0) {
-              particles.splice(i, 1);
-            } else {
-              ctx.fillStyle = p.color;
-              ctx.globalAlpha = p.alpha;
-              ctx.fillRect(Math.round(p.x), Math.round(p.y), p.size, p.size);
-            }
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vx *= 0.95;
+          p.vy *= 0.95;
+          p.alpha -= p.decay;
+          if (p.alpha <= 0) {
+            particles.splice(i, 1);
+          } else {
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = p.alpha;
+            // Draw crisp retro pixel square
+            ctx.fillRect(Math.round(p.x), Math.round(p.y), p.size, p.size);
           }
-          ctx.globalAlpha = 1;
-        } else if (needsUpdate) {
-           ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
+        ctx.globalAlpha = 1;
       }
 
-      if (needsUpdate) {
-        isIdle = false;
-        rafId = requestAnimationFrame(animate);
-      } else {
-        isIdle = true;
-        rafId = null;
-      }
+      rafId = requestAnimationFrame(animate);
     };
 
-    const handleMouseMoveTrigger = (e) => {
-      onMouseMove(e);
-      if (isIdle) {
-        isIdle = false;
-        rafId = requestAnimationFrame(animate);
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMoveTrigger, { passive: true });
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
     document.addEventListener('mouseover', onMouseOver, { passive: true });
     rafId = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('mousemove', handleMouseMoveTrigger);
+      window.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseover', onMouseOver);
       if (rafId) cancelAnimationFrame(rafId);
       cancelAnimationFrame(initFrame);

@@ -53,14 +53,6 @@ export default function IntroductionSection() {
     if (!section) return;
 
     // --- 1. LAYERED MOUSE PARALLAX (Interpolated via gsap.ticker) ---
-    // PERF FIX: Only run parallax calculations when section is visible
-    let isParallaxVisible = false;
-
-    const parallaxObserver = new IntersectionObserver(([entry]) => {
-      isParallaxVisible = entry.isIntersecting;
-    }, { threshold: 0, rootMargin: '100px' });
-    parallaxObserver.observe(section);
-
     const handleMouseMoveParallax = (e) => {
       targetMouseRef.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
       targetMouseRef.current.y = (e.clientY / window.innerHeight - 0.5) * 2;
@@ -73,9 +65,6 @@ export default function IntroductionSection() {
     const cursorParticlesEl = document.querySelector('.cursor-glow-canvas') || document.querySelector('#cursor-canvas');
 
     const parallaxTicker = () => {
-      // Skip all calculations when section is offscreen
-      if (!isParallaxVisible) return;
-
       // Smooth interpolation toward mouse target (never directly follows mouse)
       currentMouseRef.current.x += (targetMouseRef.current.x - currentMouseRef.current.x) * 0.06;
       currentMouseRef.current.y += (targetMouseRef.current.y - currentMouseRef.current.y) * 0.06;
@@ -194,7 +183,6 @@ export default function IntroductionSection() {
     return () => {
       window.removeEventListener('mousemove', handleMouseMoveParallax);
       gsap.ticker.remove(parallaxTicker);
-      parallaxObserver.disconnect();
       ctx.revert();
     };
   }, []);

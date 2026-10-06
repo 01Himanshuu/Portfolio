@@ -17,7 +17,7 @@ export default function ScrollProgress() {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      fill.style.transform = `scaleY(${progress / 100})`;
+      fill.style.height = `${progress}%`;
     };
 
     window.addEventListener('scroll', updateProgress, { passive: true });
