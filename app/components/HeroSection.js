@@ -18,6 +18,7 @@ function HelloTubeSVG() {
   const targetRot = useRef({ x: 0, y: 0 });
   const currentRot = useRef({ x: 0, y: 0 });
   const rafId = useRef(null);
+  const isVisibleRef = useRef(true);
 
   useEffect(() => {
     const onMouseMove = (e) => {
@@ -28,6 +29,10 @@ function HelloTubeSVG() {
     };
 
     const animate = () => {
+      if (!isVisibleRef.current) {
+        rafId.current = requestAnimationFrame(animate);
+        return;
+      }
       currentRot.current.x += (targetRot.current.x - currentRot.current.x) * 0.08;
       currentRot.current.y += (targetRot.current.y - currentRot.current.y) * 0.08;
 
@@ -37,12 +42,20 @@ function HelloTubeSVG() {
       rafId.current = requestAnimationFrame(animate);
     };
 
+    // Pause when hero is offscreen
+    const heroEl = document.getElementById('hero');
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+    }, { threshold: 0 });
+    if (heroEl) observer.observe(heroEl);
+
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     rafId.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       if (rafId.current) cancelAnimationFrame(rafId.current);
+      observer.disconnect();
     };
   }, []);
 
@@ -253,9 +266,26 @@ function FloatingSticker({
   const targetOffsetRef = useRef({ x: 0, y: 0, rotate: 0 });
   const offsetRef = useRef({ x: 0, y: 0, rotate: 0 });
   const startTimeRef = useRef(null);
+  
+  const [canDrop, setCanDrop] = useState(false);
 
   useEffect(() => {
+    if (sessionStorage.getItem('hasLoadedBefore')) {
+      setTimeout(() => setCanDrop(true), 0);
+    } else {
+      const handleLoaderComplete = () => {
+        setCanDrop(true);
+      };
+      window.addEventListener('loaderComplete', handleLoaderComplete);
+      return () => window.removeEventListener('loaderComplete', handleLoaderComplete);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!canDrop) return; // Do not initialize physics until loader finishes
+
     let rafId;
+    let heroVisible = true;
 
     const onMouseMove = (e) => {
       if (!stickerRef.current || !landedRef.current) return;
@@ -280,6 +310,12 @@ function FloatingSticker({
     };
 
     const animate = (timestamp) => {
+      // Skip physics calculations when hero is offscreen (but keep RAF alive for re-entry)
+      if (!heroVisible && landedRef.current) {
+        rafId = requestAnimationFrame(animate);
+        return;
+      }
+
       if (!startTimeRef.current) startTimeRef.current = timestamp;
       const elapsed = (timestamp - startTimeRef.current) / 1000;
 
@@ -331,14 +367,22 @@ function FloatingSticker({
       rafId = requestAnimationFrame(animate);
     };
 
+    // Pause sticker physics when hero is offscreen
+    const heroEl = document.getElementById('hero');
+    const observer = new IntersectionObserver(([entry]) => {
+      heroVisible = entry.isIntersecting;
+    }, { threshold: 0 });
+    if (heroEl) observer.observe(heroEl);
+
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     rafId = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       if (rafId) cancelAnimationFrame(rafId);
+      observer.disconnect();
     };
-  }, [speed, delay, initialRotate]);
+  }, [speed, delay, initialRotate, canDrop]);
 
   const onClick = () => {
     playClick();
@@ -357,6 +401,7 @@ function FloatingSticker({
         height: size,
         zIndex: 2,
         cursor: 'pointer',
+        transform: canDrop ? undefined : `translate3d(0, -950px, 0) rotate(${initialRotate - 38}deg) scale(1.15)`
       }}
       onMouseEnter={playStickerPop}
       onClick={onClick}
@@ -396,6 +441,8 @@ function MagneticHeading({ children, className = '', maxTilt = 12 }) {
 
   useEffect(() => {
     let rafId;
+    let heroVisible = true;
+
     const onMouseMove = (e) => {
       const rect = containerRef.current?.getBoundingClientRect();
       if (!rect) return;
@@ -410,6 +457,10 @@ function MagneticHeading({ children, className = '', maxTilt = 12 }) {
     };
 
     const animate = () => {
+      if (!heroVisible) {
+        rafId = requestAnimationFrame(animate);
+        return;
+      }
       rotRef.current.x += (targetRef.current.x - rotRef.current.x) * 0.1;
       rotRef.current.y += (targetRef.current.y - rotRef.current.y) * 0.1;
       if (containerRef.current) {
@@ -418,12 +469,20 @@ function MagneticHeading({ children, className = '', maxTilt = 12 }) {
       rafId = requestAnimationFrame(animate);
     };
 
+    // Pause when hero is offscreen
+    const heroEl = document.getElementById('hero');
+    const observer = new IntersectionObserver(([entry]) => {
+      heroVisible = entry.isIntersecting;
+    }, { threshold: 0 });
+    if (heroEl) observer.observe(heroEl);
+
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     rafId = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       if (rafId) cancelAnimationFrame(rafId);
+      observer.disconnect();
     };
   }, [maxTilt]);
 
@@ -445,14 +504,15 @@ function MagneticHeading({ children, className = '', maxTilt = 12 }) {
  * - Continuous Cinematic Scroll Transition → Pinned while transition runs with scrubbed overlapping timelines!
  */
 export default function HeroSection() {
-  const [scrollY, setScrollY] = useState(0);
+  // PERF FIX: Use ref instead of state to avoid re-rendering on every scroll event
+  const scrollYRef = useRef(0);
   const { playDimensionSwoosh } = useSound();
   const hasSwooshedRef = useRef(false);
 
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      setScrollY(y);
+      scrollYRef.current = y;
       if (y > 320 && !hasSwooshedRef.current) {
         hasSwooshedRef.current = true;
         playDimensionSwoosh();
@@ -482,12 +542,14 @@ export default function HeroSection() {
       });
 
       // 2. SCRUBBED OVERLAPPING HERO EXIT TIMELINE
+      // PERF FIX: Removed filter:'blur(8px)' — CSS filter animation on scrub
+      // causes expensive repaints every frame. opacity + transform achieves
+      // the same cinematic exit without the paint cost.
       tl.to('.hero-dimension-wrapper', {
         rotateX: 25,
         scale: 0.78,
         y: -110,
         opacity: 0,
-        filter: 'blur(8px)',
         ease: 'none',
       });
     });
@@ -592,7 +654,7 @@ export default function HeroSection() {
           </div>
 
           {/* Top-right: Description */}
-          <div className="hero-bio">
+          <div className="hero-bio relative z-20 max-md:bg-black/20 max-md:backdrop-blur-md max-md:p-4 max-md:rounded-2xl">
             <p>
               I&apos;m Himanshu Jangra, a software developer and
               content creator crafting digital experiences
@@ -603,7 +665,7 @@ export default function HeroSection() {
           </div>
 
           {/* Bottom-left: Main title — wide architectural Manrope ExtraBold font, completely still */}
-          <div className="hero-title-wrapper">
+          <div className="hero-title-wrapper pb-24 md:pb-0">
             <h1 className="hero-title">
               SOFTWARE<br />
               DEVELOPER &amp;<br />
